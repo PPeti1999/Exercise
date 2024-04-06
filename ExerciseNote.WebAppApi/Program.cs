@@ -12,6 +12,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System;
 using ExerciseNote.WebAppApi.Services;
+using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -94,7 +96,23 @@ builder.Services.AddScoped<IExerciseTypeRepository, ExerciseTypeRepository>();
 
 builder.Services.AddCors();// ez jó
 
+builder.Services.Configure<ApiBehaviorOptions>(options =>// error kuldes ui ra
+{
+    options.InvalidModelStateResponseFactory = actionContext =>
+    {
+        var errors = actionContext.ModelState
+        .Where(x => x.Value.Errors.Count > 0)
+        .SelectMany(x => x.Value.Errors)
+        .Select(x => x.ErrorMessage).ToArray();
 
+        var toReturn = new
+        {
+            Errors = errors
+        };
+
+        return new BadRequestObjectResult(toReturn);
+    };
+});
 var app = builder.Build();
 app.UseCors(opt =>
 {

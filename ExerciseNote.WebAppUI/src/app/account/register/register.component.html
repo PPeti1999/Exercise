@@ -59,6 +59,9 @@
                         Password must be at least 6, and maximum 15 characters
                     </span>
                 </div>
+                <div class="form-floatin" *ngIf="errorMessages.length > 0">
+                    <app-validation-messages [errorMessages]="errorMessages"></app-validation-messages>
+                </div>
 
                 
                 <div class="d-grid mt-4 px-1">
