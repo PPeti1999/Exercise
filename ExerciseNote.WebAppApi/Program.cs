@@ -22,7 +22,19 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+/*builder.Services.AddCors(options =>
+{
+    
+    var clientAppUrl = builder.Configuration.GetValue<string>("ClientAppUrl");
 
+	options.AddPolicy("AllowOrigin", builder =>
+	{
+		builder
+			.WithOrigins(clientAppUrl)
+			.AllowAnyHeader()
+			.AllowAnyMethod();
+	});
+});*/
 
 
 builder.Services.AddDbContext<DataContext>(options =>
@@ -63,14 +75,15 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateIssuer = true,
             // don't validate audience (angular side)
             ValidateAudience = false,
-            ValidateLifetime = true,
-            ClockSkew = TimeSpan.Zero
+           // ValidateLifetime = true,
+           // ClockSkew = TimeSpan.Zero
         };
     });
 
 
 
 //builder.Services.AddDbContext<DataContext>();
+//majd ez kell
 builder.Services.AddScoped<IExerciseRepository, ExerciseRepository>();
 builder.Services.AddScoped<IPhotoRepository, PhotoRepository>();
 builder.Services.AddScoped<IExerciseTypeRepository, ExerciseTypeRepository>();
@@ -79,18 +92,23 @@ builder.Services.AddScoped<IExerciseTypeRepository, ExerciseTypeRepository>();
 
 
 
-
+builder.Services.AddCors();// ez jó
 
 
 var app = builder.Build();
+app.UseCors(opt =>
+{
+    opt.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins(builder.Configuration["JWT:CLientUrl"]);
+}
 
+);
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+//app.UseCors("AllowOrigin");
 app.UseHttpsRedirection();
 
 

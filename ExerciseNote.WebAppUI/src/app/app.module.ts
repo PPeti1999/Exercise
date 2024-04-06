@@ -16,19 +16,22 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { NgbPaginationModule, NgbAlertModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { SharedModule } from './shared/shared.module';
+import { PlayComponent } from './play/play.component';
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     HomeComponent,
-    FooterComponent
+    FooterComponent,
+    PlayComponent
   ],
   imports: [
     FormsModule,
     ReactiveFormsModule,
     NgbPaginationModule, NgbAlertModule,
     HttpClientModule,
-
+SharedModule,
     BrowserModule,
     AppRoutingModule,
     NgbModule,
