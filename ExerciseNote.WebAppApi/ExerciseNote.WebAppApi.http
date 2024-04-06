@@ -1,0 +1,6 @@
+@ExerciseNote.WebAppApi_HostAddress = http://localhost:5279
+
+GET {{ExerciseNote.WebAppApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
