@@ -36,7 +36,7 @@ namespace ExerciseNote.WebAppApi.Services
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(userClaims),
-                Expires = DateTime.UtcNow.AddMinutes(int.Parse(_config["JWT:ExpiresInMinutes"])),
+                Expires = DateTime.UtcNow.AddDays(int.Parse(_config["JWT:ExpiresInDays"])),
                 SigningCredentials = creadentials,
                 Issuer = _config["JWT:Issuer"]
             };

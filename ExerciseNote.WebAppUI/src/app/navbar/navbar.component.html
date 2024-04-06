@@ -1,0 +1,26 @@
+<div>
+    <mat-toolbar color="primary" >
+        <a class="nav-brand">
+            <img src="./assets/images/exerise.png" class="me-3" alt="Logo" width="75" height="75">
+        </a>
+        <button class="navbar-toggler" type="button" >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <span class="nav-item" routerLink="/" routerLinkActive="active" 
+        [routerLinkActiveOptions]="{exact:true}">Home</span>
+        <span class="spacer"></span>
+        <span class="nav-link" routerLink="/play" routerLinkActive="active">Play</span>
+      <span class="spacer"></span>
+      <div style="font-size: medium">
+        <button mat-button routerLink="/login">Login</button>
+        <span class="btn btn-secondary mx-2"  routerLink="/account/register" routerLinkActive="active"> 
+            Create account
+        </span>
+        <button  id ="userMenu" mat-button [matMenuTriggerFor]="menu"></button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item >Sign out</button>
+          <button  mat-menu-item routerLink="/users">Edit users</button>
+        </mat-menu>
+      </div>
+    </mat-toolbar>
+</div>
