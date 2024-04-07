@@ -11,4 +11,11 @@ import { AccountService } from '../account/account.service';
 })
 export class NavbarComponent {
   constructor(public accountService: AccountService) { }// mi legyen látható ha belépsz
+  logout() {
+   // this.accountService.logout();
+  }
+
+  //toggleCollapsed() {
+  //  this.collapsed = !this.collapsed;
+  //}
 }

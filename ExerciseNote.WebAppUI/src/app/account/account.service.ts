@@ -23,9 +23,9 @@ export class AccountService {
         map((user: User) => {
           if (user) {
             this.setUser(user);
-            return user;
+          
           }
-          return null;
+      
         })
       );
     }
@@ -37,7 +37,7 @@ export class AccountService {
      // this.startRefreshTokenTimer(user.jwt);
       localStorage.setItem(environment.userKey, JSON.stringify(user));// enviroment userkey e local storageben eltaroljuk //jo
       this.userSource.next(user);// itt is
-      //this.user$.subscribe({next: response => console.log(response)})
+      this.user$.subscribe({next: response => console.log(response)})
       //this.sharedService.displayingExpiringSessionModal = false;
       //this.checkUserIdleTimout();
     }
