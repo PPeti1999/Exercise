@@ -9,18 +9,18 @@ import { AccountService } from '../account.service';
   styleUrl: './login.component.css'
 })
 export class LoginComponent implements OnInit {
-  loginForm: FormGroup = new FormGroup({});
-  submitted = false;
-  errorMessages: string[] = [];
-  returnUrl: string | null = null;
-  constructor(private accountService: AccountService,
+  loginForm: FormGroup = new FormGroup({});// EZ JÓ
+  submitted = false;// EZ JÓ
+  errorMessages: string[] = [];// EZ JÓ
+ // returnUrl: string | null = null;
+
+  constructor(private accountService: AccountService,//EZJO
     private formBuilder: FormBuilder,
-    private router: Router,
+    private router: Router
   ){
     }
 
-  ngOnInit(): void {
-   // this.initiazeGoogleButton();
+  ngOnInit(): void {// EZ JÓ
     this.initializeForm();
   }
 
@@ -33,17 +33,13 @@ export class LoginComponent implements OnInit {
     })
   }
   login() {
-    this.submitted = true;
-    this.errorMessages = [];
+    this.submitted = true;// EZ JO
+    this.errorMessages = [];// EZ JO
 
-   // if (this.loginForm.valid) {
+    if (this.loginForm.valid) {
       this.accountService.login(this.loginForm.value).subscribe({
-        next: (response:any) => {
-          /*if (this.returnUrl) {
-            this.router.navigateByUrl(this.returnUrl);
-          } else {
-            this.router.navigateByUrl('/');
-          }*/
+        next: (response: any) => {
+          console.log(response);
         },
         error: error => {
           if (error.error.errors) {
@@ -53,6 +49,6 @@ export class LoginComponent implements OnInit {
           }
         }
       })
-  //  }
+    }
   }
 }
