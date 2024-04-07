@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AccountService } from '../account.service';
 import { take } from 'rxjs';
 import { User } from '../../shared/models/account/user';
@@ -14,26 +14,27 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup = new FormGroup({});// EZ JÓ
   submitted = false;// EZ JÓ
   errorMessages: string[] = [];// EZ JÓ
- // returnUrl: string | null = null;
+  returnUrl: string | null = null;
 
   constructor(private accountService: AccountService,//EZJO
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private activatedRoute:ActivatedRoute
   ){
 
     this.accountService.user$.pipe(take(1)).subscribe({
       next: (user: User | null) => {
         if (user) {
           this.router.navigateByUrl('/');// home pagera vissz  akk is h ha url bol akarnak megnyitni a login t
-        } /*else {
+        } else {
           this.activatedRoute.queryParamMap.subscribe({
             next: (params: any) => {
               if (params) {
-                this.returnUrl = params.get('returnUrl');
+                this.returnUrl = params.get('returnUrl'); // ha authova van akkor tovább engedi a url re amit itt lement 
               }
             }
           })
-        }*/
+        }
       }
     })
 
@@ -58,7 +59,12 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       this.accountService.login(this.loginForm.value).subscribe({
         next: (response: any) => {
-          this.router.navigateByUrl('/');// belepes utan home pagera vissz 
+          if(this.returnUrl){
+            this.router.navigateByUrl(this.returnUrl);// ha joogaban all ramenniu akk a lementet return url re vissz 
+          }else{
+            this.router.navigateByUrl('/');// belepes utan home pagera vissz 
+          }
+          
         },
         error: error => {
           if (error.error.errors) {

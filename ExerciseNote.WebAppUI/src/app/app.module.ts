@@ -15,9 +15,10 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NgbPaginationModule, NgbAlertModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
 import { PlayComponent } from './play/play.component';
+import { JwtInterceptor } from './shared/interceptors/jwt.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +45,10 @@ SharedModule,
     MatDialogModule
   ],
   providers: [
-    provideAnimationsAsync()
+    //provideAnimationsAsync()
+    {
+      provide:HTTP_INTERCEPTORS, useClass:JwtInterceptor,multi:true 
+    }
   ],
   bootstrap: [AppComponent]
 })

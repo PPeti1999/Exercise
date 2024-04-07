@@ -3,6 +3,8 @@ import { AccountService } from '../account.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SharedService } from '../../shared/shared.service';
 import { Router } from '@angular/router';
+import { take } from 'rxjs';
+import { User } from '../../shared/models/account/user';
 
 @Component({
   selector: 'app-register',
@@ -16,7 +18,13 @@ export class RegisterComponent implements OnInit{
 
   constructor(private accountService: AccountService,    private formBuilder: FormBuilder, private sharedService:SharedService,private router:Router
     ){
-
+      this.accountService.user$.pipe(take(1)).subscribe({// arra szolgal h a register url kézzel valo beirasara a home pagera dobjon 
+        next: (user: User | null) => {
+          if (user) {
+            this.router.navigateByUrl('/');
+          }
+        }
+      })
   }
   ngOnInit(): void {
     this.initializeForm();
