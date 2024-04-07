@@ -1,11 +1,11 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Register } from '../shared/models/account/register';
 import { environment } from '../../environments/environment.development';
 import { Login } from '../shared/models/account/login';
 import { User } from '../shared/models/account/user';
-import { ReplaySubject, map } from 'rxjs';
+import { ReplaySubject, map, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -32,13 +32,46 @@ export class AccountService {
     register(model: Register) {
       return this.http.post(`${environment.appUrl}/api/account/register`, model);//jo
     }
+    getJWT() {// belepet tokent ementi szoval ha frissitek akk belepve marad
+
+      const key = localStorage.getItem(environment.userKey);
+      if (key) {
+        const user: User = JSON.parse(key);
+        return user.jwt;
+      } else {
+        return null;
+      }
+    }
+    refreshUser(jwt: string | null) {
+      if (jwt === null) {
+        this.userSource.next(null);
+        return of(undefined);
+      }
+  
+      let headers = new HttpHeaders();
+      headers = headers.set('Authorization', 'Bearer ' + jwt);
+  //return this.http.get<User>(`${environment.appUrl}/api/account/refresh-user-token`, {headers, withCredentials: true}).pipe(
+      return this.http.get<User>(`${environment.appUrl}/api/account/refresh-user-token`, {headers}).pipe(
+        map((user: User) => {
+          if (user) {
+            this.setUser(user);
+          }
+        })
+      )
+    }
     private setUser(user: User) {
      // this.stopRefreshTokenTimer();
      // this.startRefreshTokenTimer(user.jwt);
       localStorage.setItem(environment.userKey, JSON.stringify(user));// enviroment userkey e local storageben eltaroljuk //jo
       this.userSource.next(user);// itt is
-      this.user$.subscribe({next: response => console.log(response)})
+      
       //this.sharedService.displayingExpiringSessionModal = false;
       //this.checkUserIdleTimout();
+    }
+    logout() {
+      localStorage.removeItem(environment.userKey);
+      this.userSource.next(null);
+      this.router.navigateByUrl('/');
+     // this.stopRefreshTokenTimer();
     }
 }
