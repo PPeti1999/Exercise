@@ -14,11 +14,16 @@ export class HomeComponent {
     ngOnInit(): void {
       this.getAllExercise();
     }
-    getAllExercise():void{
-      this._exerciseService.getExercise() .subscribe({
-        next: (res: Exercise[]) => (this.exerciseList = res),
-        error: (err) => console.error(err),
-      });
-    }
-
+    getAllExercise(): void {
+    this._exerciseService.getExercise().subscribe({
+      next: (res: Exercise[]) => {
+        this.exerciseList = res;
+        console.log(this.exerciseList);
+      
+      },
+      error: (err) => console.error(err),
+    });
+  }
 }
+
+

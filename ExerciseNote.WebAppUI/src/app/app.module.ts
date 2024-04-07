@@ -19,13 +19,17 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
 import { PlayComponent } from './play/play.component';
 import { JwtInterceptor } from './shared/interceptors/jwt.interceptor';
+import { ExerciseDetailsPageComponent } from './exercise-details-page/exercise-details-page.component';
+import { DeleteExerciseComponent } from './delete-exercise/delete-exercise.component';
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     HomeComponent,
     FooterComponent,
-    PlayComponent
+    PlayComponent,
+    ExerciseDetailsPageComponent,
+    DeleteExerciseComponent
   ],
   imports: [
     FormsModule,

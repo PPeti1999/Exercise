@@ -1,5 +1,5 @@
 export class Photo {
     public id: string;
-    public data: string;
+    public photoData: string;
   }
   

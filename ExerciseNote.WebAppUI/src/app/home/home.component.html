@@ -1,21 +1,22 @@
-<a  class="btn btn-primary" href="exercise/create">Create exercise</a>
+<a class="btn btn-primary" href="exercise/create">Create exercise</a>
 
 <div class="mb-3" style="padding-top: 10px;">
   <label for="search" class="form-label">Search</label>
   <input type="text" class="form-control" aria-describedby="search" #search>
 </div>
 
-<div class="card-container">
-  <div *ngFor="let exercise of exerciseList">
-    <a routerLink="{{exercise.id}}">
-    <div class="card">
-      <div class="card-body">
-        <p class="title">{{ exercise.title }}</p>
+<div class="row">
+  <div class="col-md-6" *ngFor="let exercise of exerciseList">
+    <a routerLink="{{exercise.id}}" class="card-link">
+      <div class="card mb-3">
+        <div class="card-body">
+          <p class="title">{{ exercise.title }}</p>
+        </div>
+        <div class="view overlay">
+          <img class="img-fluid" src="{{ exercise.photo.photoData }}" alt="{{ exercise.title }}">
+        
+        </div>
       </div>
-      <img src="data:image/png;base64,{{ exercise.photo.data }}"  alt="{{ exercise.title }}">
-    </div>
     </a>
   </div>
 </div>
-
-<div>ccssc</div>

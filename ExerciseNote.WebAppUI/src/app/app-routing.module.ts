@@ -4,9 +4,14 @@ import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './shared/components/errors/not-found/not-found.component';
 import { PlayComponent } from './play/play.component';
 import { AuthorizationGuard } from './shared/guards/authorization.guard';
+import { ExerciseDetailsPageComponent } from './exercise-details-page/exercise-details-page.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, //canActivate: [AuthGuard]
+},
+{
+  path: ':id',
+  component: ExerciseDetailsPageComponent,
 },
 { path: '', 
 runGuardsAndResolvers:'always',
@@ -16,8 +21,6 @@ children:[// ide kell tenni azokat az elereseket amiket csak belepes utan szabad
 
   {path: 'play',component: PlayComponent
 },
-
-
 ]
 },
 
