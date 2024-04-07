@@ -21,6 +21,7 @@ import { PlayComponent } from './play/play.component';
 import { JwtInterceptor } from './shared/interceptors/jwt.interceptor';
 import { ExerciseDetailsPageComponent } from './exercise-details-page/exercise-details-page.component';
 import { DeleteExerciseComponent } from './delete-exercise/delete-exercise.component';
+import { CreateExerciseComponent } from './create-exercise/create-exercise.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +30,8 @@ import { DeleteExerciseComponent } from './delete-exercise/delete-exercise.compo
     FooterComponent,
     PlayComponent,
     ExerciseDetailsPageComponent,
-    DeleteExerciseComponent
+    DeleteExerciseComponent,
+    CreateExerciseComponent
   ],
   imports: [
     FormsModule,
