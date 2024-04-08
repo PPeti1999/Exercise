@@ -36,7 +36,7 @@ export class CreateExerciseComponent implements OnInit  {
         next: (res: Exercise) => {
           this.editingExercise = res;
           this.exercise = { ...res };
-          this.exercise.created_At = new Date().toString(); // Format endDate for the date input
+          this.exercise.created_at = new Date().toString(); // Format endDate for the date input
           this.selectedExerciseName = res.type.name ?? ''; 
           console.log(res);
         },
@@ -71,7 +71,7 @@ export class CreateExerciseComponent implements OnInit  {
           id: undefined,
           name: this.selectedExerciseName,
         },
-        created_At: new Date().toString(),
+        created_at: new Date().toString(),
       };
 
       this.exerciseService.updateExercise(this.exercise).subscribe({

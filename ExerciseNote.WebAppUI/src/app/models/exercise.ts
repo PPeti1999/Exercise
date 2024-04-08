@@ -6,7 +6,7 @@ export class Exercise {
   public title: string;
   public type: ExerciseType;
   public body: string;
-  public created_At: string ;
+  public created_at: string ;
   public photo: Photo;
   
 }

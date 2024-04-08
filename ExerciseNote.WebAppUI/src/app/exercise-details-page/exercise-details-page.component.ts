@@ -32,6 +32,8 @@ export class ExerciseDetailsPageComponent implements OnInit{
           created_At: res.created_At.toString(), // Átalakítjuk a string dátumot Date objektummá
           photo: res.photo
         };*/
+
+        //ráellenőrini h nem 0 template be
         console.log(res);
     },
           error: (err) => console.error(err),

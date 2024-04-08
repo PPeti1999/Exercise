@@ -28,7 +28,7 @@
                        
                     </h1>
                     <!-- Post meta content-->
-                    <div class="text-muted fst-italic mb-2">Posted on {{ exercise.created_At| date:'yyyy-MM-dd' }}</div>
+                    <div class="text-muted fst-italic mb-2">Posted on {{ exercise.created_at}}</div>
                     
                     <!-- Post categories-->
                     
@@ -45,7 +45,7 @@
     <div class="col-md-8">
       <h3 class="pb-4 mb-4 fst-italic border-bottom">
         <div class="news-image">
-          <img src="{{ exercise.photo?.photoData }}" alt="{{ exercise.title }}" class="img-fluid" />
+         <!--<img src="{{ exercise.photo.photoData }}" alt="{{ exercise.title }}" class="img-fluid" /> --> 
         </div>
       </h3>
 
