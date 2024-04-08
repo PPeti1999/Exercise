@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../environments';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Exercise } from '../models/exercise';
 import { ExerciseType } from '../models/exerciseType';
-const baseUrl = environment.baseUrl;
+import { environment } from '../../environments/environment.development';
+const baseUrl = environment.appUrl;
 @Injectable({
   providedIn: 'root'
 })
@@ -12,7 +12,7 @@ const baseUrl = environment.baseUrl;
 export class ExerciseTypeService {
   
   constructor(private http: HttpClient) {}
-  baseUrl: string = `${baseUrl}/exercisetype`;
+  baseUrl: string = `${baseUrl}/api/exercisetype`;
 
   getType(): Observable<ExerciseType[]> {
     return this.http.get<ExerciseType[]>(this.baseUrl);

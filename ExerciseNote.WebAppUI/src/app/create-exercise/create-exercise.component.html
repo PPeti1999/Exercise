@@ -1,1 +1,122 @@
-<p>create-exercise works!</p>
+<div class="row">
+    <div class="col-md-6 mx-auto">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="display-5">Exercise</h2>
+        </div>
+        <div class="card-body">
+          <form
+            class="form"
+            #exerciseFrom="ngForm"
+            (ngSubmit)="exerciseFrom.form.valid && createOrUpdateExercise()"
+            novalidate
+            autocomplete="off"
+          >
+            <div class="mb-3">
+              <label for="title" class="form-label">Title</label>
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="exercise.title"
+                name="title"
+                #titleInput="ngModel"
+                [required]="true"
+              />
+              <span
+                class="text-danger"
+                *ngIf="(titleInput.touched || exerciseFrom.submitted) && titleInput.errors?.['required']"
+              >
+                Title is required
+              </span>
+            </div>
+  
+           
+  
+            <div class="mb-3">
+              <div
+                style="
+                  display: flex;
+                  padding-bottom: 10px;
+                  justify-content: space-between;
+                "
+              >
+                <label for="subtitle" class="form-label">Type</label>
+                &nbsp;
+                <div style="display: flex;">
+                  <input
+                    style="width: 200px"
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="newTypeName"
+                    name="newTypeName"
+                  />
+                  &nbsp;
+                  <button type="button" (click)="addType()">
+                    Add new type
+                  </button>
+                </div>
+              </div>
+  
+              <select
+                name="type"
+                [(ngModel)]="selectedExerciseName"
+                class="form-select"
+                selected="selectedExerciseName"
+              >
+                <option
+                  *ngFor="let type of types"
+                  [value]="type.name"
+                >
+                  {{ type.name }}
+                </option>
+              </select>
+            </div>
+  
+            <div class="mb-3">
+              <label for="content" class="form-label">Body</label>
+              <textarea
+                class="form-control"
+                [(ngModel)]="exercise.body"
+                name="body"
+                #bodyInput="ngModel"
+                [required]="true"
+              ></textarea>
+              <span
+                class="text-danger"
+                *ngIf="(bodyInput.touched || exerciseFrom.submitted) && bodyInput.errors?.['required']"
+              >
+                Body is required
+              </span>
+            </div>
+  
+            
+  
+            
+  
+            <div class="mb-3">
+              <input type="file" (change)="onFileSelected($event)" />
+              <button class="btn btn-primary" type="submit">
+                {{ editingExercise ? "Update" : "Create" }} Exercise
+              </button>
+  
+              <div
+                *ngIf="!this.editingExercise && (!selectedFile && (exerciseFrom.submitted || showAlert))"
+                class="text-danger"
+              >
+                File is required
+              </div>
+            </div>
+            <div *ngIf="showAlert" class="alert alert-success" role="alert">
+              {{
+                editingExercise
+                  ? "Exercise successfully edited!"
+                  : "Exercise successfully created!"
+              }}
+              <button class="btn btn-primary" [routerLink]="['/']">Back</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  

@@ -5,14 +5,12 @@ import { NotFoundComponent } from './shared/components/errors/not-found/not-foun
 import { PlayComponent } from './play/play.component';
 import { AuthorizationGuard } from './shared/guards/authorization.guard';
 import { ExerciseDetailsPageComponent } from './exercise-details-page/exercise-details-page.component';
+import { CreateExerciseComponent } from './create-exercise/create-exercise.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, //canActivate: [AuthGuard]
 },
-{
-  path: ':id',
-  component: ExerciseDetailsPageComponent,
-},
+
 { path: '', 
 runGuardsAndResolvers:'always',
 canActivate:[AuthorizationGuard],
@@ -23,7 +21,20 @@ children:[// ide kell tenni azokat az elereseket amiket csak belepes utan szabad
 },
 ]
 },
+{
+  path: 'create',
+  component: CreateExerciseComponent
+ // canActivate: [AdminGuard]
+},
 
+{
+  path: ':id',
+  component: ExerciseDetailsPageComponent,
+},
+{
+  path: ':id/edit',
+  component: CreateExerciseComponent
+},
 {path: 'account',loadChildren:()=>import('./account/account.module').then(module=>module.AccountModule) 
  // canActivate: [AdminGuard]
 },

@@ -24,6 +24,15 @@ export class ExerciseDetailsPageComponent implements OnInit{
     this.exerciseService.getExerciseById(id).subscribe({
       next: (res: Exercise) => {
         this.exercise = res;
+        /*this.exercise = {
+          id: res.id,
+          title: res.title,
+          type: res.type,
+          body: res.body,
+          created_At: res.created_At.toString(), // Átalakítjuk a string dátumot Date objektummá
+          photo: res.photo
+        };*/
+        console.log(res);
     },
           error: (err) => console.error(err),
   });
@@ -37,8 +46,8 @@ export class ExerciseDetailsPageComponent implements OnInit{
     });
   }
   edit() {
-   // const exerciseId = this.exercise.id; 
-   // this.router.navigate(['exercise', exerciseId, 'edit']);
+    const exerciseId = this.exercise.id; 
+    this.router.navigate([exerciseId, 'edit']);
   }
   openDeleteModal(): void {
     const modalRef = this.modalService.open(DeleteExerciseComponent);
