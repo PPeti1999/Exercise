@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace ExerciseNote.WebAppApi.Data.Migrations
+namespace ExerciseNote.WebAppApi.Migrations
 {
     /// <inheritdoc />
-    public partial class AddingUserToDatabase : Migration
+    public partial class InitialSetup : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -72,7 +72,7 @@ namespace ExerciseNote.WebAppApi.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    PhotoData = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    PhotoData = table.Column<byte[]>(type: "varbinary(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -226,12 +226,12 @@ namespace ExerciseNote.WebAppApi.Data.Migrations
                 columns: new[] { "Id", "PhotoData" },
                 values: new object[,]
                 {
-                    { "1", "https://picsum.photos/200/300" },
-                    { "2", "https://picsum.photos/id/237/200/300" },
-                    { "3", "https://picsum.photos/seed/picsum/200/300" },
-                    { "4", "https://picsum.photos/200/300?grayscale" },
-                    { "5", "https://picsum.photos/200/300/?blur" },
-                    { "6", "https://picsum.photos/id/870/200/300?grayscale&blur=2" }
+                    { "1", null },
+                    { "2", null },
+                    { "3", null },
+                    { "4", null },
+                    { "5", null },
+                    { "6", null }
                 });
 
             migrationBuilder.InsertData(

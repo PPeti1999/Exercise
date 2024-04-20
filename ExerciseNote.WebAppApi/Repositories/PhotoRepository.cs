@@ -23,21 +23,21 @@ namespace ExerciseNote.WebAppApi.Repositories
 
         public async Task<Photo> GetPhoto(string id)
         {
-            var image = await context.Photos.FindAsync(id);
+            var photo = await context.Photos.FindAsync(id);
 
-            return image;
+            return photo;
         }
 
         public async Task<bool> DeletePhoto(string id)
         {
-            var image = await context.Exercise.FindAsync(id);
+            var photo = await context.Exercise.FindAsync(id);
 
-            if (image == null)
+            if (photo == null)
             {
                 return false;
             }
 
-            context.Exercise.Remove(image);
+            context.Exercise.Remove(photo);
             await context.SaveChangesAsync();
 
             return true;

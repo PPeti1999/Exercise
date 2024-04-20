@@ -9,8 +9,8 @@
           <p class="title">{{ exercise.title }}</p>
         </div>
         <div class="view overlay">
-          <img class="img-fluid" src="{{ exercise.photo.photoData }}" alt="{{ exercise.title }}">
-        
+         <!-- <img class="img-fluid" src="{{ exercise.photo.photoData }}" alt="{{ exercise.title }}">-->
+         <img src="data:image/png;base64,{{ exercise.photo.photoData }}"  alt="{{ exercise.title }}">
         </div>
       </div>
     </a>

@@ -1,0 +1,133 @@
+backend:
+nugetek:
+ef core 
+ef core sql
+ef core tools
+jwtbearer
+System.IdentityModel.Tokens.Jwt
+Microsoft.AspNetCore.Identity.EntityFrameworkCore
+parancs:
+Add-Migration 'Initial Setup' (sikeres legyen a build)
+update-database
+
+
+frontend:
+npm install -g @angular/cli
+ng new ExerciseNote.WebAppUI --no-standalone
+ng add @ng-bootstrap/ng-bootstrap
+
+
+
+
+
+
+
+
+
+
+copy:
+ExerciseNote projekt név
+Repo
+Controller
+Models
+Program.cs
+appsettings.json
+Migrácio:Package Manager Console(ba):
+
+
+
+frontend:
+ng add @ng-bootstrap/ng-bootstrap
+ng add @angular/material (yes,indigo pink, yes,animation)
+null lehessen(Property '...' has no initializer..):
+Just go to tsconfig.json and set
+"compilerOptions": {
+    "strictPropertyInitialization": false,
+    ...
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+npm install
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+npm install -g @angular/cli
+materialnak:
+68
+
+First, execute this in your terminal.
+
+npm config set legacy-peer-deps true
+Second, clear the cache:
+
+npm cache clean --force
+npm install --save @angular/material
+
+npm install bootstrap
+ng add @angular/localize
+npm install @ng-bootstrap/ng-bootstrap
+version hiba:
+https://codeforgeek.com/update-node-using-npm/
+30
+
+I found a solution, this is what I did:
+
+Open your package-lock.json.
+
+Find node_modules/fsevents, inside this there is something called "os", I had only this:
+
+ "os": [
+        "darwin",
+      ],
+So my OS is windows 10 64 bits I just added my OS inside "os", the result is this:
+
+ "os": [
+        "darwin",
+        "win32"
+      ],
+
+
+
+
+
+
+Kérdések:
+
+Megjegyzés: Add-Migration 'Initial Setup' ?
+PhotoId kellet állítani nullable miatt
+
+Describe the bug
+dotnet tool update skips NuGet package signature verification.
+
+To Reproduce
+$ dotnet tool update <PACKAGE_ID> --global -> kézzel telepítettem
+
+
+
+
+
+megkell csinalni : 
+
+asp.net core identity 
+
+azure blobkstroge 
+több kapcsolat photohoz url 

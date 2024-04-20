@@ -8,6 +8,6 @@ namespace ExerciseNote.WebAppApi.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]// szöveges id generálás
         public string Id { get; set; }
-        public string PhotoData { get; set; }// a kép url tömbben való tárolásásra 
+        public byte[] PhotoData { get; set; }// a kép url tömbben való tárolásásra 
     }
 }

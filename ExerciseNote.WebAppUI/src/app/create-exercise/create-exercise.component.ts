@@ -4,6 +4,7 @@ import { ExerciseService } from '../service/exercise.service';
 import { ActivatedRoute } from '@angular/router';
 import { ExerciseTypeService } from '../service/exercise-type.service';
 import { ExerciseType } from '../models/exerciseType';
+import { Observable, ReplaySubject } from 'rxjs';
 
 @Component({
   selector: 'app-create-exercise',
@@ -43,7 +44,8 @@ export class CreateExerciseComponent implements OnInit  {
         error: (err) => console.error(err),
       });
     }
-  }
+  }  
+
   loadTypes() {
     this.exerciseTypeService.getType().subscribe({
       next: (res) => {
@@ -58,65 +60,79 @@ export class CreateExerciseComponent implements OnInit  {
   }
 
 
+ 
   createOrUpdateExercise(): void {
-    if (!this.editingExercise && !this.selectedFile) {
-      return;
+      if (!this.editingExercise && !this.selectedFile) {
+        return;
+      }
+  
+      if (this.editingExercise && !this.selectedFile) {
+        this.exercise = {
+          ...this.exercise,
+          type: {
+            id: undefined,
+            name: this.selectedExerciseName,
+          },
+          created_at: new Date().toISOString(),
+        };
+  
+        this.exerciseService.updateExercise(this.exercise).subscribe({
+          next: (res) => {
+            console.log(res);
+            this.showAlert = true;
+          },
+          error: (err) => {
+            console.error(err);
+          },
+        });
+      } else if(this.selectedFile) {
+        this.encodeImageToBase64(this.selectedFile).subscribe({
+          next: (res) => {
+            const base64image = res;
+  
+            this.exercise = {
+              ...this.exercise,
+              type: {
+                id: undefined,
+                name: this.selectedExerciseName,
+              },
+              created_at: new Date().toISOString(),
+              photo: { photoData: base64image },
+            };
+  
+            const newsObservable = this.editingExercise
+              ? this.exerciseService.updateExercise(this.exercise)
+              : this.exerciseService.createExercise(this.exercise);
+  
+            newsObservable.subscribe({
+              next: (res) => {
+                console.log(res);
+                this.showAlert = true;
+              },
+              error: (err) => {
+                console.error(err);
+              },
+            });
+          },
+          error: (err) => console.error(err),
+        });
+      }
     }
 
-    if (this.editingExercise && !this.selectedFile) {
-      
-      this.exercise = {
-        ...this.exercise,
-        type: {
-          id: undefined,
-          name: this.selectedExerciseName,
-        },
-        created_at: new Date().toString(),
-      };
 
-      this.exerciseService.updateExercise(this.exercise).subscribe({
-        next: (res) => {
-          console.log(res);
-          this.showAlert = true;
-        },
-        error: (err) => {
-          console.error(err);
-        },
-      });
-    } else if(this.selectedFile) {
-     
-/*
-          this.exercise = {
-            ...this.exercise,
-            this: {
-              id: undefined,
-              name: this.selectedExerciseName,
-            },
-            created_At: new Date().toISOString(),
-            photo: { id: undefined,photoData: "nem tudom " },
-          };
-*/
-          const newsObservable = this.editingExercise
-            ? this.exerciseService.updateExercise(this.exercise)
-            : this.exerciseService.createExercise(this.exercise);
 
-          newsObservable.subscribe({
-            next: (res) => {
-              console.log(res);
-              this.showAlert = true;
-            },
-            error: (err) => {
-              console.error(err);
-            },
-          });
-      
-    }
+
+  encodeImageToBase64(file: File): Observable<string> {
+    const result = new ReplaySubject<string>(1);
+    const reader = new FileReader();
+
+    reader.onload = (event) =>
+      result.next(btoa(event?.target?.result?.toString() || ''));
+
+    reader.readAsBinaryString(file);
+
+    return result;
   }
-
-
-
-
-
 
 
   addType() {

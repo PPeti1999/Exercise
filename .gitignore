@@ -396,6 +396,4 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
-/ExerciseNote.WebAppApi/Data/DataContext.cs
-/ExerciseNote.WebAppApi/Data/DataContext.cs
 /Exercise.WebAppUI

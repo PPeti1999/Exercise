@@ -40,12 +40,13 @@
 </div>
 
 
-<main class="container-fluid">
-  <div class="row g-5">
-    <div class="col-md-8">
+<main class="container">
+  <div class="row">
+    <div class="col">
       <h3 class="pb-4 mb-4 fst-italic border-bottom">
         <div class="news-image">
          <!--<img src="{{ exercise.photo.photoData }}" alt="{{ exercise.title }}" class="img-fluid" /> --> 
+         <img src="data:image/png;base64,{{ exercise.photo.photoData  }}" alt="{{ exercise.title }}" class="img-fluid" />
         </div>
       </h3>
 

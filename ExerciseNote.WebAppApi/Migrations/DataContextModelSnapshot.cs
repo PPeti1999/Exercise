@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace ExerciseNote.WebAppApi.Data.Migrations
+namespace ExerciseNote.WebAppApi.Migrations
 {
     [DbContext(typeof(DataContext))]
     partial class DataContextModelSnapshot : ModelSnapshot
@@ -149,8 +149,8 @@ namespace ExerciseNote.WebAppApi.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("PhotoData")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte[]>("PhotoData")
+                        .HasColumnType("varbinary(max)");
 
                     b.HasKey("Id");
 
@@ -159,33 +159,27 @@ namespace ExerciseNote.WebAppApi.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "1",
-                            PhotoData = "https://picsum.photos/200/300"
+                            Id = "1"
                         },
                         new
                         {
-                            Id = "2",
-                            PhotoData = "https://picsum.photos/id/237/200/300"
+                            Id = "2"
                         },
                         new
                         {
-                            Id = "3",
-                            PhotoData = "https://picsum.photos/seed/picsum/200/300"
+                            Id = "3"
                         },
                         new
                         {
-                            Id = "4",
-                            PhotoData = "https://picsum.photos/200/300?grayscale"
+                            Id = "4"
                         },
                         new
                         {
-                            Id = "5",
-                            PhotoData = "https://picsum.photos/200/300/?blur"
+                            Id = "5"
                         },
                         new
                         {
-                            Id = "6",
-                            PhotoData = "https://picsum.photos/id/870/200/300?grayscale&blur=2"
+                            Id = "6"
                         });
                 });
 
