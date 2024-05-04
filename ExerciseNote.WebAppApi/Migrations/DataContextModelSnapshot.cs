@@ -22,6 +22,74 @@ namespace ExerciseNote.WebAppApi.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("ExerciseNote.WebAppApi.Models.BodyDiary", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Age")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BodyFat")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Created_at")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Height")
+                        .HasColumnType("int");
+
+                    b.Property<string>("IdUser")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("MaintainWeight")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PhotoId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Weight")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WeightGain")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WeightLoss")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PhotoId");
+
+                    b.ToTable("BodyDiary");
+                });
+
+            modelBuilder.Entity("ExerciseNote.WebAppApi.Models.BodyDiaryWeekly", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("Created_at")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("IdBodyDairy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhotoId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Weight")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PhotoId");
+
+                    b.ToTable("BodyDiaryWeekly");
+                });
+
             modelBuilder.Entity("ExerciseNote.WebAppApi.Models.Exercise", b =>
                 {
                     b.Property<string>("Id")
@@ -387,6 +455,24 @@ namespace ExerciseNote.WebAppApi.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("ExerciseNote.WebAppApi.Models.BodyDiary", b =>
+                {
+                    b.HasOne("ExerciseNote.WebAppApi.Models.Photo", "Photo")
+                        .WithMany()
+                        .HasForeignKey("PhotoId");
+
+                    b.Navigation("Photo");
+                });
+
+            modelBuilder.Entity("ExerciseNote.WebAppApi.Models.BodyDiaryWeekly", b =>
+                {
+                    b.HasOne("ExerciseNote.WebAppApi.Models.Photo", "Photo")
+                        .WithMany()
+                        .HasForeignKey("PhotoId");
+
+                    b.Navigation("Photo");
                 });
 
             modelBuilder.Entity("ExerciseNote.WebAppApi.Models.Exercise", b =>

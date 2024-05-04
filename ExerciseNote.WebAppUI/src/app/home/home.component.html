@@ -1,17 +1,14 @@
 <a class="btn btn-primary" href="/create">Create exercise</a>
 
 
-<div class="row">
-  <div class="col-md-6" *ngFor="let exercise of exerciseList">
-    <a routerLink="{{exercise.id}}" class="card-link">
-      <div class="card mb-3">
-        <div class="card-body">
-          <p class="title">{{ exercise.title }}</p>
-        </div>
-        <div class="view overlay">
-         <!-- <img class="img-fluid" src="{{ exercise.photo.photoData }}" alt="{{ exercise.title }}">-->
-         <img src="data:image/png;base64,{{ exercise.photo.photoData }}"  alt="{{ exercise.title }}">
-        </div>
+<div class="card-container">
+  <div class="card" *ngFor="let exercise of exerciseList">
+    <a routerLink="exercise/{{exercise.id}}" class="card-link">
+      <div class="card-body">
+        <p class="title">{{ exercise.title }}</p>
+      </div>
+      <div class="image-container">
+        <img src="data:image/png;base64,{{ exercise.photo.photoData }}"  alt="{{ exercise.title }}">
       </div>
     </a>
   </div>

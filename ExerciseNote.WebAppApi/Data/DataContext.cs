@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace ExerciseNote.WebAppApi.Data
 {
@@ -15,6 +16,9 @@ namespace ExerciseNote.WebAppApi.Data
           //  InitializeData();
         } 
         public DbSet<Exercise> Exercise { get; set; } = default!;
+        
+        public DbSet<BodyDiaryWeekly> BodyDiaryWeekly { get; set; } = default!;
+        public DbSet<BodyDiary> BodyDiary { get; set; } = default!;
         public DbSet<ExerciseType> ExerciseType { get; set; }
         //public DbSet<User> Users { get; set; }
         public DbSet<Photo> Photos { get; set; }
@@ -104,6 +108,7 @@ namespace ExerciseNote.WebAppApi.Data
                 new Photo { Id = "5", PhotoData = null },
                 new Photo { Id = "6", PhotoData = null }
             );
+
             modelBuilder.Entity<Exercise>().HasData(
                 new Exercise { Id = "1", Title = "Lehúzás", ExerciseTypeId = "1", Body = "Just Do it.", PhotoId = "1" },
                 new Exercise { Id = "2", Title = "Húzódzkodás", ExerciseTypeId = "2", Body = "Hurry Up!", PhotoId = "2" },
@@ -118,6 +123,7 @@ namespace ExerciseNote.WebAppApi.Data
                 new ExerciseType { Id = "2", Name = "Chest" },
                 new ExerciseType { Id = "3", Name = "Legs" }
             );
+           
         }
     }
 }

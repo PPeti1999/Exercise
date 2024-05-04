@@ -6,6 +6,8 @@ import { PlayComponent } from './play/play.component';
 import { AuthorizationGuard } from './shared/guards/authorization.guard';
 import { ExerciseDetailsPageComponent } from './exercise-details-page/exercise-details-page.component';
 import { CreateExerciseComponent } from './create-exercise/create-exercise.component';
+import { DeleteExerciseComponent } from './delete-exercise/delete-exercise.component';
+import { CreateBodydiaryComponent } from './create-bodydiary/create-bodydiary.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, //canActivate: [AuthGuard]
@@ -15,32 +17,20 @@ const routes: Routes = [
 runGuardsAndResolvers:'always',
 canActivate:[AuthorizationGuard],
 children:[// ide kell tenni azokat az elereseket amiket csak belepes utan szabad latni 
-
-
-  {path: 'play',component: PlayComponent
+{path: 'bodydiary',component: PlayComponent
 },
+{path: 'create',component: CreateExerciseComponent
+},
+{path: 'exercise/:id/edit',component: CreateExerciseComponent
+},
+{path:'createbodydiary',component:CreateBodydiaryComponent}
 ]
 },
-{
-  path: 'create',
-  component: CreateExerciseComponent
- // canActivate: [AdminGuard]
-},
 
-{
-  path: ':id',
-  component: ExerciseDetailsPageComponent,
-},
-{
-  path: ':id/edit',
-  component: CreateExerciseComponent
-},
-{path: 'account',loadChildren:()=>import('./account/account.module').then(module=>module.AccountModule) 
- // canActivate: [AdminGuard]
-},
-{ path: 'not-found', component: NotFoundComponent, //canActivate: [AuthGuard]
-},
-{ path: '**', component: NotFoundComponent,pathMatch:'full' //canActivate: [AuthGuard]
+{path: 'exercise/:id',component: ExerciseDetailsPageComponent,},
+{path: 'account',loadChildren:()=>import('./account/account.module').then(module=>module.AccountModule) },
+{ path: 'not-found', component: NotFoundComponent,},
+{ path: '**', component: NotFoundComponent,pathMatch:'full'// érvénytelen kérés esetén ezt tölti be 
 },
 ];
 

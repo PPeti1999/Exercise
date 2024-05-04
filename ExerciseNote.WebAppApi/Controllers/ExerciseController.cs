@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ExerciseNote.WebAppApi.Controllers
 {
@@ -51,6 +52,7 @@ namespace ExerciseNote.WebAppApi.Controllers
 
         [HttpPost]
         //  [Authorize(Policy = "Admin")]
+        [Authorize]
         public async Task<ActionResult<Exercise>> AddExercise([FromBody] Exercise exercise)
         {
             if (exercise?.Type?.Name == null || exercise.Photo == null) return BadRequest();
@@ -69,6 +71,7 @@ namespace ExerciseNote.WebAppApi.Controllers
             return Ok(create);
         }
         [HttpPut]
+        [Authorize]
         // [Authorize(Policy = "Admin")]
         public async Task<ActionResult<Exercise>> UpdateExercise([FromBody] Exercise exercise)
         {
@@ -85,6 +88,7 @@ namespace ExerciseNote.WebAppApi.Controllers
 
 
         [HttpDelete("{id}")]
+        [Authorize]
         // [Authorize(Policy = "Admin")]
         public async Task<ActionResult<bool>> DeleteExercise(string id)
         {

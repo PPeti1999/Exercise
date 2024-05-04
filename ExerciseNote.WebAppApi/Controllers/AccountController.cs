@@ -73,6 +73,7 @@ namespace ExerciseNote.WebAppApi.Controllers
             {
                 FirstName = user.FirstName,
                 LastName = user.LastName,
+                id=user.Id,
                 JWT = _jWTService.CreateJWT(user),
             };
         }

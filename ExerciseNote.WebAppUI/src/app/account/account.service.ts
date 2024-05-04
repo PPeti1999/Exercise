@@ -13,6 +13,7 @@ import { ReplaySubject, map, of } from 'rxjs';
 export class AccountService {
   private userSource = new ReplaySubject<User | null>(1);// OBSERVER AMIRE FELIRATKOZUNK ami egy lehet //jo
   user$ = this.userSource.asObservable();// itt feliratkozunk ra//jo
+ 
   constructor(private http: HttpClient, //jo
     private router: Router,
     ) { }

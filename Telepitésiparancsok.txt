@@ -7,7 +7,7 @@ jwtbearer
 System.IdentityModel.Tokens.Jwt
 Microsoft.AspNetCore.Identity.EntityFrameworkCore
 parancs:
-Add-Migration 'Initial Setup' (sikeres legyen a build)
+Add-Migration 'Initial Setup' (sikeres legyen a build) v a
 update-database
 
 

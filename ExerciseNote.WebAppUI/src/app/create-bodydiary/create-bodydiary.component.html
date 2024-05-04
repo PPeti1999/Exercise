@@ -1,0 +1,172 @@
+<div class="row">
+    <div class="col-md-6 mx-auto">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="display-5">Body Diary</h2>
+        </div>
+        <div class="card-body">
+          <form
+            class="form"
+            #bodyDiaryFrom="ngForm"
+            (ngSubmit)="bodyDiaryFrom.form.valid && createBodyDiary()"
+            novalidate
+            autocomplete="off"
+          >
+
+          <div class="mb-3">
+            <label for="age" class="form-label">Age</label>
+            <input
+            type="date"
+              class="form-control"
+              [(ngModel)]="bodyDiary.age"
+              name="age"
+              #ageInput="ngModel"
+              [required]="true"
+            >
+            <span
+                class="text-danger"
+                *ngIf="(ageInput.touched || bodyDiaryFrom.submitted) && ageInput.errors?.['required']"
+              >
+                Age is required
+              </span>
+          </div>
+
+
+
+
+          <div class="mb-3">
+            <label for="height" class="form-label">Height (CM)</label>
+            <input
+            type="number"
+              class="form-control"
+              [(ngModel)]="bodyDiary.height"
+              name="height"
+              #heightInput="ngModel"
+              [required]="true"
+            >
+            <span
+                class="text-danger"
+                *ngIf="(heightInput.touched || bodyDiaryFrom.submitted) && heightInput.errors?.['required']"
+              >
+              Height is required
+              </span>
+          </div>
+
+          <div class="mb-3">
+            <label for="weight" class="form-label">Weight (KG)</label>
+            <input
+            type="number"
+              class="form-control"
+              [(ngModel)]="bodyDiary.weight"
+              name="weight"
+              #weightInput="ngModel"
+              [required]="true"
+            >
+            <span
+                class="text-danger"
+                *ngIf="(weightInput.touched || bodyDiaryFrom.submitted) && weightInput.errors?.['required']"
+              >
+              Weight is required
+              </span>
+          </div>
+
+          <div class="mb-3">
+            <label for="bodyFat" class="form-label">Body fat(%)</label>
+            <input
+            type="number"
+              class="form-control"
+              [(ngModel)]="bodyDiary.bodyFat"
+              name="bodyFat"
+              #bodyFatInput="ngModel"
+              [required]="true"
+              [ngStyle]="{ 'margin-bottom.px': '10' }"
+            >
+            
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal" 
+            (click)="openModel()">
+                Body fat info
+            </button>
+            <div>
+              <span
+              class="text-danger"
+              *ngIf="(bodyFatInput.touched || bodyDiaryFrom.submitted) && bodyFatInput.errors?.['required']"
+              >
+               Body fat is required
+              </span>
+            </div>
+
+          </div>
+
+
+          <div class="mb-3">
+            <label for="content" class="form-label">Activity</label>
+            <select
+            name="type"
+            [(ngModel)]="selectedActivity"
+            class="form-select"
+            selected="selectedActivity"
+            >
+            <option
+              *ngFor="let type of activityOptions"
+              [value]="type"
+            >
+              {{ type }}
+            </option>
+          </select>
+          </div>
+  
+            
+  
+            
+  
+            <div class="mb-3">
+              <input type="file" (change)="onFileSelected($event)" />
+              <button class="btn btn-primary" type="submit">
+                Create Body Goal
+              </button>
+  
+              <div
+                *ngIf="!selectedFile && (bodyDiaryFrom.submitted || showAlert)"
+                class="text-danger"
+              >
+                File is required
+              </div>
+            </div>
+            <div *ngIf="showAlert" class="alert alert-success" role="alert">
+              {{
+              "Exercise successfully created!"
+              }}
+              <button class="btn btn-primary" [routerLink]="['/']">Back</button>
+            </div>
+
+              
+              <!-- The Modal -->
+              <div class="modal" id="myModal">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+              
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                      <h4 class="modal-title">Body fat picture</h4>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="closeModel()"></button>
+                    </div>
+              
+                    <!-- Modal body -->
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <a class="nav-brand">
+                            <img src="./assets/images/bodyfat.png" alt="Logo" style="max-width: 100%; height: auto;">
+                        </a>
+                    </div>
+              
+                  </div>
+                </div>
+
+
+              </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  

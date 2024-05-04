@@ -30,6 +30,6 @@ export class SharedService {
       ignoreBackdropClick: true
     }
 
-    //this.bsModalRef = this.modalService.show(ExpiringSessionCountdownComponent, config);
+    
   }
 }

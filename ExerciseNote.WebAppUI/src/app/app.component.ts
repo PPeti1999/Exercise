@@ -19,19 +19,7 @@ constructor(private accountService: AccountService,
 ngOnInit(): void {
   this.refreshUser();
 }
-/*
-@HostListener('window:keydown')
-@HostListener('window:mousedown')
-checkUserActivity() {
-  this.accountService.user$.pipe(take(1)).subscribe({
-    next: (user: User | null) => {
-      if (user) {
-        clearTimeout(this.accountService.timeoutId);
-        this.accountService.checkUserIdleTimout();
-      }
-    }
-  })
-}*/
+
 
 private refreshUser() {
   const jwt = this.accountService.getJWT();

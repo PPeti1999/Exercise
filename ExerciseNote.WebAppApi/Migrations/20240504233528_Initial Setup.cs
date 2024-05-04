@@ -186,6 +186,52 @@ namespace ExerciseNote.WebAppApi.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "BodyDiary",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    IdUser = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Age = table.Column<int>(type: "int", nullable: false),
+                    Height = table.Column<int>(type: "int", nullable: false),
+                    Weight = table.Column<int>(type: "int", nullable: false),
+                    BodyFat = table.Column<int>(type: "int", nullable: false),
+                    MaintainWeight = table.Column<int>(type: "int", nullable: false),
+                    WeightLoss = table.Column<int>(type: "int", nullable: false),
+                    WeightGain = table.Column<int>(type: "int", nullable: false),
+                    Created_at = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    PhotoId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BodyDiary", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_BodyDiary_Photos_PhotoId",
+                        column: x => x.PhotoId,
+                        principalTable: "Photos",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "BodyDiaryWeekly",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    IdBodyDairy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Weight = table.Column<int>(type: "int", nullable: false),
+                    Created_at = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    PhotoId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BodyDiaryWeekly", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_BodyDiaryWeekly_Photos_PhotoId",
+                        column: x => x.PhotoId,
+                        principalTable: "Photos",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Exercise",
                 columns: table => new
                 {
@@ -282,6 +328,16 @@ namespace ExerciseNote.WebAppApi.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_BodyDiary_PhotoId",
+                table: "BodyDiary",
+                column: "PhotoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BodyDiaryWeekly_PhotoId",
+                table: "BodyDiaryWeekly",
+                column: "PhotoId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Exercise_ExerciseTypeId",
                 table: "Exercise",
                 column: "ExerciseTypeId");
@@ -316,6 +372,12 @@ namespace ExerciseNote.WebAppApi.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "BodyDiary");
+
+            migrationBuilder.DropTable(
+                name: "BodyDiaryWeekly");
 
             migrationBuilder.DropTable(
                 name: "Exercise");
