@@ -2,8 +2,8 @@ import { User } from "../shared/models/account/user";
 import { Photo } from "./photo";
 
 export class BodyDiary {
-  public id: number;
-  public idUser: User;
+  public id: string;
+  public idUser: string;
   public age: number;
   public height: number;
   public weight: number;

@@ -7,6 +7,6 @@ namespace ExerciseNote.WebAppApi.Repositories
     public interface IBodyDiaryWeeklyRepository
     {
         public Task<IEnumerable<BodyDiaryWeekly>> ListActualBodyDiaryWeekly(string actualidBodyDiary);
-        public Task<BodyDiaryWeekly> AddBodyDiary(BodyDiaryWeekly bodyDiaryWeekly);
+        public Task<BodyDiaryWeekly> AddBodyDiaryWeekly(BodyDiaryWeekly bodyDiaryWeekly);
     }
 }

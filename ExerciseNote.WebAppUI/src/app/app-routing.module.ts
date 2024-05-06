@@ -8,6 +8,8 @@ import { ExerciseDetailsPageComponent } from './exercise-details-page/exercise-d
 import { CreateExerciseComponent } from './create-exercise/create-exercise.component';
 import { DeleteExerciseComponent } from './delete-exercise/delete-exercise.component';
 import { CreateBodydiaryComponent } from './create-bodydiary/create-bodydiary.component';
+import { HomeBodydiaryComponent } from './home-bodydiary/home-bodydiary.component';
+import { CreateBodydiaryweeklyComponent } from './create-bodydiaryweekly/create-bodydiaryweekly.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, //canActivate: [AuthGuard]
@@ -17,14 +19,16 @@ const routes: Routes = [
 runGuardsAndResolvers:'always',
 canActivate:[AuthorizationGuard],
 children:[// ide kell tenni azokat az elereseket amiket csak belepes utan szabad latni 
-{path: 'bodydiary',component: PlayComponent
+{path: 'bodydiary',component: HomeBodydiaryComponent
 },
 {path: 'create',component: CreateExerciseComponent
 },
 {path: 'exercise/:id/edit',component: CreateExerciseComponent
 },
-{path:'createbodydiary',component:CreateBodydiaryComponent}
-]
+{path:'createbodydiary',component:CreateBodydiaryComponent},
+{path:'createbodydiaryweekly',component:CreateBodydiaryweeklyComponent},
+],
+
 },
 
 {path: 'exercise/:id',component: ExerciseDetailsPageComponent,},

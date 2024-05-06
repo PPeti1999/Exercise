@@ -23,6 +23,8 @@ import { ExerciseDetailsPageComponent } from './exercise-details-page/exercise-d
 import { DeleteExerciseComponent } from './delete-exercise/delete-exercise.component';
 import { CreateExerciseComponent } from './create-exercise/create-exercise.component';
 import { CreateBodydiaryComponent } from './create-bodydiary/create-bodydiary.component';
+import { HomeBodydiaryComponent } from './home-bodydiary/home-bodydiary.component';
+import { CreateBodydiaryweeklyComponent } from './create-bodydiaryweekly/create-bodydiaryweekly.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +35,9 @@ import { CreateBodydiaryComponent } from './create-bodydiary/create-bodydiary.co
     ExerciseDetailsPageComponent,
     DeleteExerciseComponent,
     CreateExerciseComponent,
-    CreateBodydiaryComponent
+    CreateBodydiaryComponent,
+    HomeBodydiaryComponent,
+    CreateBodydiaryweeklyComponent
   ],
   imports: [
     FormsModule,

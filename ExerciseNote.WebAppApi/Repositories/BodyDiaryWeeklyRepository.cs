@@ -16,7 +16,7 @@ namespace ExerciseNote.WebAppApi.Repositories
             this.context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public async Task<BodyDiaryWeekly> AddBodyDiary(BodyDiaryWeekly bodyDiaryWeekly)
+        public async Task<BodyDiaryWeekly> AddBodyDiaryWeekly(BodyDiaryWeekly bodyDiaryWeekly)
         {
             context.BodyDiaryWeekly.Add(bodyDiaryWeekly);
             await context.SaveChangesAsync();
@@ -39,6 +39,7 @@ namespace ExerciseNote.WebAppApi.Repositories
             return await context.BodyDiaryWeekly
                 .Where(bdw => bdw.IdBodyDairy == bodyDiary.Id)
                 .OrderBy(bdw => bdw.Created_at)
+                 .Include(n => n.Photo)
                 .ToListAsync();
 
              

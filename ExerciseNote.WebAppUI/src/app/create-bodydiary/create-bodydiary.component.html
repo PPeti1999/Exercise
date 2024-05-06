@@ -16,7 +16,7 @@
           <div class="mb-3">
             <label for="age" class="form-label">Age</label>
             <input
-            type="date"
+            type="number"
               class="form-control"
               [(ngModel)]="bodyDiary.age"
               name="age"
@@ -136,7 +136,7 @@
               {{
               "Exercise successfully created!"
               }}
-              <button class="btn btn-primary" [routerLink]="['/']">Back</button>
+              <button class="btn btn-primary" [routerLink]="['/bodydiary']">Back</button>
             </div>
 
               

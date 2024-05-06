@@ -9,6 +9,9 @@ using System;
 
 namespace ExerciseNote.WebAppApi.Controllers
 {
+   // [Authorize]
+    [Route("api/[controller]")]
+    [ApiController]
     public class BodyDairyWeeklyController : Controller
     {
         private readonly IBodyDiaryWeeklyRepository _bodyDiaryWeeklyRepository;
@@ -37,8 +40,8 @@ namespace ExerciseNote.WebAppApi.Controllers
         }
 
         [HttpPost]
-        [Authorize]
-        public async Task<ActionResult<BodyDiaryWeekly>> AddBodyDiary([FromBody] BodyDiaryWeekly bodyDiaryWeekly)
+   
+        public async Task<ActionResult<BodyDiaryWeekly>> AddBodyDiaryWeekly([FromBody] BodyDiaryWeekly bodyDiaryWeekly)
         {
             if (bodyDiaryWeekly.Photo == null) return BadRequest();
 
@@ -47,7 +50,7 @@ namespace ExerciseNote.WebAppApi.Controllers
             var uploadedPhoto = await _photoRepository.UploadPhoto(bodyDiaryWeekly.Photo);
             bodyDiaryWeekly.PhotoId = uploadedPhoto.Id;
 
-            var create = await _bodyDiaryWeeklyRepository.AddBodyDiary(bodyDiaryWeekly);
+            var create = await _bodyDiaryWeeklyRepository.AddBodyDiaryWeekly(bodyDiaryWeekly);
 
             return Ok(create);
         }

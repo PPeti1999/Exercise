@@ -9,9 +9,10 @@ using System.Threading.Tasks;
 
 namespace ExerciseNote.WebAppApi.Controllers
 {
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class BodyDairyController : Controller
+    public class BodyDairyController : ControllerBase
     {
         private readonly IBodyDiaryRepository _bodyDiaryRepository;
         private readonly IPhotoRepository _photoRepository;
@@ -40,7 +41,6 @@ namespace ExerciseNote.WebAppApi.Controllers
        
 
         [HttpPost]
-        [Authorize]
         public async Task<ActionResult<BodyDiary>> AddBodyDiary([FromBody] BodyDiary bodyDiary)
         {
             if ( bodyDiary.Photo == null) return BadRequest();

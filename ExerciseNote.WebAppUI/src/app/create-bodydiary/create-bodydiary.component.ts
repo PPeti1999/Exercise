@@ -9,6 +9,7 @@ import { Dialog } from '@angular/cdk/dialog';
 import { User } from '../shared/models/account/user';
 import { AccountService } from '../account/account.service';
 import { BodyDiary } from '../models/bodyDiary';
+import { HomeBodydiaryService } from '../service/home-bodydiary.service';
 
 @Component({
   selector: 'app-create-bodydiary',
@@ -35,17 +36,13 @@ totalDailyNeedCalories:number;
 
   constructor(
     private dialog: Dialog,
-    private exerciseService: ExerciseService,
+    private _homeBodyDiaryServcie: HomeBodydiaryService,
     private route: ActivatedRoute,
-    private exerciseTypeService: ExerciseTypeService,
     public accountService: AccountService
   ) {}
 
-  types: ExerciseType[] = [];
 
   selectedActivity: string;
-  addingExerciseType = false;
-  newTypeName: string;
   currentUser: User | null = null;
 
 
@@ -72,6 +69,10 @@ totalDailyNeedCalories:number;
   loadCurrentUser() {
     this.accountService.user$.subscribe((user: User | null) => {
       this.currentUser = user;
+      if(user!=null){
+        this.bodyDiary.idUser=user.id;
+      }else this.bodyDiary.idUser='';
+      
       if (user) {
         console.log('Bejelentkezett felhasználó:', user);
       } else {
@@ -84,17 +85,37 @@ totalDailyNeedCalories:number;
 
  
   createBodyDiary(): void {
-      if ( !this.selectedFile) {
-        return;
-      }
-  /*
-      if (this.editingExercise && !this.selectedFile) {
-        this.exercise = {
-          ...this.exercise,
+    this.calorieCalculator();
+
+  if (!this.selectedFile) {
+    this.bodyDiary = {
+      ...this.bodyDiary,
+      created_at: new Date().toISOString(),
+    };
+
+    this._homeBodyDiaryServcie.AddBodyDiary(this.bodyDiary).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.showAlert = true;
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
+  } else {
+    this.encodeImageToBase64(this.selectedFile).subscribe({
+      next: (res) => {
+        const base64image = res;
+
+        this.bodyDiary = {
+          ...this.bodyDiary,
           created_at: new Date().toISOString(),
+          photo: { photoData: base64image },
         };
-  
-        this.exerciseService.updateExercise(this.exercise).subscribe({
+
+        const newsObservable = this._homeBodyDiaryServcie.AddBodyDiary(this.bodyDiary);
+
+        newsObservable.subscribe({
           next: (res) => {
             console.log(res);
             this.showAlert = true;
@@ -103,40 +124,10 @@ totalDailyNeedCalories:number;
             console.error(err);
           },
         });
-      } else if(this.selectedFile) {
-        this.encodeImageToBase64(this.selectedFile).subscribe({
-          next: (res) => {
-            const base64image = res;
-  
-            this.exercise = {
-              ...this.exercise,
-              type: {
-                id: undefined,
-                name: this.selectedExerciseName,
-              },
-              created_at: new Date().toISOString(),
-              photo: { photoData: base64image },
-            };
-  
-            const newsObservable = this.editingExercise
-              ? this.exerciseService.updateExercise(this.exercise)
-              : this.exerciseService.createExercise(this.exercise);
-  
-            newsObservable.subscribe({
-              next: (res) => {
-                console.log(res);
-                this.showAlert = true;
-              },
-              error: (err) => {
-                console.error(err);
-              },
-            });
-          },
-          error: (err) => console.error(err),
-        });
-      }*/
-      this.calorieCalculator();
-      console.log(this.bodyDiary);
+      },
+      error: (err) => console.error(err),
+    });
+  }
     }
   calorieCalculator(){
     this.tsFile= this.bodyDiary.weight*2.20462262*((100-this.bodyDiary.bodyFat)/100);//JO
@@ -158,7 +149,7 @@ totalDailyNeedCalories:number;
    // console.log( this.af);
     this.tsFileFood=(this.bmr+this.af)*0.1;
    // console.log(this.tsFileFood);
-    this.totalDailyNeedCalories=this.bmr+this.af+this.tsFileFood;
+    this.totalDailyNeedCalories=Math.round(this.bmr+this.af+this.tsFileFood);
     this.bodyDiary.maintainWeight=this.totalDailyNeedCalories;
     this.bodyDiary.weightLoss=this.totalDailyNeedCalories-500;
     this.bodyDiary.weightGain=this.totalDailyNeedCalories+500;

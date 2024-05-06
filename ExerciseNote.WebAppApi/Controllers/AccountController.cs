@@ -67,13 +67,14 @@ namespace ExerciseNote.WebAppApi.Controllers
             if (!result.Succeeded) return BadRequest(result.Errors);
             return Ok(new JsonResult(new {title="Account Created",message= "Your account has been created, you can login" }));
         }
-        private UserDto CreateApplicationUserDto(User user)
+        private UserDto CreateApplicationUserDto(User user)// token frssités miatt mindig kell lennie legalább 1 felhasználünak aza datbázisban.
         {
             return new UserDto
             {
                 FirstName = user.FirstName,
                 LastName = user.LastName,
-                id=user.Id,
+                 id = user.Id,
+               
                 JWT = _jWTService.CreateJWT(user),
             };
         }

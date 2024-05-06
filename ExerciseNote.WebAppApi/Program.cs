@@ -86,6 +86,10 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 //builder.Services.AddDbContext<DataContext>();
 //majd ez kell
+builder.Services.AddScoped<IBodyDiaryRepository, BodyDiaryRepository>();
+builder.Services.AddScoped<IBodyDiaryWeeklyRepository, BodyDiaryWeeklyRepository>();
+
+builder.Services.AddScoped<IExerciseRepository, ExerciseRepository>();
 builder.Services.AddScoped<IExerciseRepository, ExerciseRepository>();
 builder.Services.AddScoped<IPhotoRepository, PhotoRepository>();
 builder.Services.AddScoped<IExerciseTypeRepository, ExerciseTypeRepository>();

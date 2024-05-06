@@ -20,6 +20,13 @@ namespace ExerciseNote.WebAppApi.Repositories
         public async Task<BodyDiary> AddBodyDiary(BodyDiary bodyDiary)
         {
             context.BodyDiary.Add(bodyDiary);
+           /* context.BodyDiaryWeekly.Add(new BodyDiaryWeekly
+            {
+                IdBodyDairy = bodyDiary.Id,
+                Weight = bodyDiary.Weight, // Példa: más adatokat is hozzáadhatsz a létrehozáshoz
+                Created_at = bodyDiary.Created_at, // Példa: más adatokat is hozzáadhatsz a létrehozáshoz
+                                                   // Egyéb tulajdonságok inicializálása
+            });*/
             await context.SaveChangesAsync();
 
             return bodyDiary;
@@ -30,6 +37,7 @@ namespace ExerciseNote.WebAppApi.Repositories
             return await context.BodyDiary
                 .Where(bd => bd.IdUser == userId)
                 .OrderByDescending(bd => bd.Created_at)
+                .Include(n => n.Photo)
                 .FirstOrDefaultAsync();
 
         }
