@@ -88,7 +88,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 //majd ez kell
 builder.Services.AddScoped<IBodyDiaryRepository, BodyDiaryRepository>();
 builder.Services.AddScoped<IBodyDiaryWeeklyRepository, BodyDiaryWeeklyRepository>();
-
+builder.Services.AddScoped<IWorkoutPlanRepositories, WorkoutPlanRepositories>();
 builder.Services.AddScoped<IExerciseRepository, ExerciseRepository>();
 builder.Services.AddScoped<IExerciseRepository, ExerciseRepository>();
 builder.Services.AddScoped<IPhotoRepository, PhotoRepository>();

@@ -10,6 +10,7 @@ import { DeleteExerciseComponent } from './delete-exercise/delete-exercise.compo
 import { CreateBodydiaryComponent } from './create-bodydiary/create-bodydiary.component';
 import { HomeBodydiaryComponent } from './home-bodydiary/home-bodydiary.component';
 import { CreateBodydiaryweeklyComponent } from './create-bodydiaryweekly/create-bodydiaryweekly.component';
+import { CreateWorkoutplanComponent } from './create-workoutplan/create-workoutplan.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, //canActivate: [AuthGuard]
@@ -27,6 +28,7 @@ children:[// ide kell tenni azokat az elereseket amiket csak belepes utan szabad
 },
 {path:'createbodydiary',component:CreateBodydiaryComponent},
 {path:'createbodydiaryweekly',component:CreateBodydiaryweeklyComponent},
+{path:'createworkoutplan',component:CreateWorkoutplanComponent},
 ],
 
 },

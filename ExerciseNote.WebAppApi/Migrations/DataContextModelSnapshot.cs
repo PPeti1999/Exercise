@@ -327,6 +327,31 @@ namespace ExerciseNote.WebAppApi.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("ExerciseNote.WebAppApi.Models.WorkoutPlan", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("BurnedCalories")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Created_at")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ExerciseIdList")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IdBodyDiary")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("WorkoutTime")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("WorkoutPlan");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")

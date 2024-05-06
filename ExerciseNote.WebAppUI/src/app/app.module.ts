@@ -26,6 +26,9 @@ import { CreateBodydiaryComponent } from './create-bodydiary/create-bodydiary.co
 import { HomeBodydiaryComponent } from './home-bodydiary/home-bodydiary.component';
 import { CreateBodydiaryweeklyComponent } from './create-bodydiaryweekly/create-bodydiaryweekly.component';
 import { ChartModule } from 'primeng/chart';
+import { CreateWorkoutplanComponent } from './create-workoutplan/create-workoutplan.component';
+import {MatSelectModule} from '@angular/material/select';
+import {MatFormFieldModule} from '@angular/material/form-field';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +41,8 @@ import { ChartModule } from 'primeng/chart';
     CreateExerciseComponent,
     CreateBodydiaryComponent,
     HomeBodydiaryComponent,
-    CreateBodydiaryweeklyComponent
+    CreateBodydiaryweeklyComponent,
+    CreateWorkoutplanComponent
   ],
   imports: [
     FormsModule,
@@ -57,6 +61,7 @@ SharedModule,
     MatCardModule,
     MatDialogModule,
     ChartModule,
+    MatFormFieldModule, MatSelectModule
   ],
   providers: [
     //provideAnimationsAsync()

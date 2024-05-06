@@ -18,6 +18,7 @@ namespace ExerciseNote.WebAppApi.Data
         public DbSet<Exercise> Exercise { get; set; } = default!;
         
         public DbSet<BodyDiaryWeekly> BodyDiaryWeekly { get; set; } = default!;
+        public DbSet<WorkoutPlan> WorkoutPlan { get; set; } = default!;
         public DbSet<BodyDiary> BodyDiary { get; set; } = default!;
         public DbSet<ExerciseType> ExerciseType { get; set; }
         //public DbSet<User> Users { get; set; }

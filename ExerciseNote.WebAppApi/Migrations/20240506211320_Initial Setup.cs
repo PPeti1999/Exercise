@@ -80,6 +80,22 @@ namespace ExerciseNote.WebAppApi.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "WorkoutPlan",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    IdBodyDiary = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ExerciseIdList = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    WorkoutTime = table.Column<int>(type: "int", nullable: false),
+                    BurnedCalories = table.Column<int>(type: "int", nullable: false),
+                    Created_at = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_WorkoutPlan", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -381,6 +397,9 @@ namespace ExerciseNote.WebAppApi.Migrations
 
             migrationBuilder.DropTable(
                 name: "Exercise");
+
+            migrationBuilder.DropTable(
+                name: "WorkoutPlan");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
