@@ -25,6 +25,7 @@ import { CreateExerciseComponent } from './create-exercise/create-exercise.compo
 import { CreateBodydiaryComponent } from './create-bodydiary/create-bodydiary.component';
 import { HomeBodydiaryComponent } from './home-bodydiary/home-bodydiary.component';
 import { CreateBodydiaryweeklyComponent } from './create-bodydiaryweekly/create-bodydiaryweekly.component';
+import { ChartModule } from 'primeng/chart';
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,7 +55,8 @@ SharedModule,
     MatIconModule,
     MatMenuModule,
     MatCardModule,
-    MatDialogModule
+    MatDialogModule,
+    ChartModule,
   ],
   providers: [
     //provideAnimationsAsync()

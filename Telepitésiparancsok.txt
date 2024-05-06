@@ -15,7 +15,9 @@ frontend:
 npm install -g @angular/cli
 ng new ExerciseNote.WebAppUI --no-standalone
 ng add @ng-bootstrap/ng-bootstrap
-
+npm install primeng --save
+npm install primeicons --save
+npm install chart.js --save
 
 
 
