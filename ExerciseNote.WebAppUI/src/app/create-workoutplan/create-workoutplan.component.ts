@@ -15,7 +15,7 @@ import { FormControl } from '@angular/forms';
   styleUrl: './create-workoutplan.component.css'
 })
 export class CreateWorkoutplanComponent {
-  selectedExercisesControl = new FormControl([]);
+  selectedExercisesControl = new FormControl<number[]>([]);
 
   workoutPlan: WorkoutPlan = {} as WorkoutPlan;
   showAlert: boolean = false;
@@ -72,29 +72,43 @@ export class CreateWorkoutplanComponent {
 
  
   createWorkoutPlan(): void {
-   
-    this.workoutPlan.idBodyDairy=this.bodyDiary.id.toString();
+   console.log("atualis body id",this.bodyDiary);
+    this.workoutPlan.IdBodyDiary=this.bodyDiary.id;
     this.workoutPlan.created_at = new Date().toISOString();
-    this.workoutPlan.burnedCalories=(this.bodyDiary.weight/200)*3.5*10;
+    this.workoutPlan.burnedCalories=Math.round((this.bodyDiary.weight/200)*3.5*10);
 
   // Kiválasztott gyakorlatok azonosítóinak hozzáadása a workoutPlan exerciseIdList tömbjéhez
-console.log (this.selectedExercisesControl)
-    //this.workoutPlan.exerciseIdList = this.selectedExercisesControl.map(id => id.toString());
+console.log ("adatok:",this.selectedExercisesControl)
+if (this.selectedExercisesControl && this.selectedExercisesControl.value) {
+  this.workoutPlan.exerciseIdList = this.selectedExercisesControl.value.map(id => id.toString());
+}// this.workoutPlan.exerciseIdList=string["",""];
 
 
 
+   // this.workoutPlan.exerciseIdList = this.selectedExercisesControl.map(id => id.toString());
 
-	  const newsObservable = this._workoutPlanService.AddWrokoutPlan(this.workoutPlan);
+
+    this._workoutPlanService.AddWorkoutPlan(this.workoutPlan).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.showAlert = true;
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
+
+	  /*const newsObservable = this._workoutPlanService.AddWorkoutPlan (this.workoutPlan);
 
    newsObservable.subscribe({
     next: (res) => {
-      console.log(res);
+      console.log("Elküldött adatok:",res);
       this.showAlert = true;
     },
     error: (err) => {
       console.error(err);
     },
-    });
+    });*/
     }
   
 }

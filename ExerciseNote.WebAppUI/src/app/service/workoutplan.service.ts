@@ -25,7 +25,7 @@ export class WorkoutplanService {
 
 
 
-  AddWrokoutPlan(bodyDiary: WorkoutPlan): Observable<WorkoutPlan> {
+  AddWorkoutPlan (bodyDiary: WorkoutPlan): Observable<WorkoutPlan> {
     console.log(bodyDiary);
     return this.http.post<WorkoutPlan>(this.baseUrl, bodyDiary, {
       headers: { 'Content-Type': 'application/json' },

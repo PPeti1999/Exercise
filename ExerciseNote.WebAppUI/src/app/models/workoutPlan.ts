@@ -1,6 +1,6 @@
 export class WorkoutPlan {
     public id: string;
-    public idBodyDairy: string;
+    public IdBodyDiary: string;
     public exerciseIdList:string[];
     public workoutTime: number;
     public burnedCalories: number;

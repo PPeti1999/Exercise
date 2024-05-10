@@ -12,61 +12,66 @@
     <!-- Custom styles for this template -->
     <link href="exercise-details-page.component.css" rel="stylesheet">
   </head>
-<body>
-
-  <div class="container mt-5">
-    <div class="row">
-        <div class="col-lg-8">
-            <!-- Post content-->
-            <article>
-                <header class="mb-4">
-                    <!-- Post title with larger font size -->
-                    <h1 class="fw-bolder mb-1" style="font-size: xx-large;">
-                        {{ exercise.title }}
-                        <!-- Big yellow star icon -->
-                        <!-- SVG csillag ikon -->
-                       
-                    </h1>
-                    <!-- Post meta content-->
-                    <div class="text-muted fst-italic mb-2">Posted on {{ exercise.created_at}}</div>
-                    
-                    <!-- Post categories-->
-                    
-                    <a *ngIf="exercise?.type?.name" class="badge bg-secondary text-decoration-none link-light" >{{ exercise.type.name }}</a>
-                </header>
-            </article>
-        </div>
-    </div>
-</div>
-
-
-<main class="container">
-  <div class="row">
-    <div class="col">
-      <h3 class="pb-4 mb-4 fst-italic border-bottom">
-        <div class="news-image">
-         <!--<img src="{{ exercise.photo.photoData }}" alt="{{ exercise.title }}" class="img-fluid" /> --> 
-         <img src="data:image/png;base64,{{ exercise.photo.photoData  }}" alt="{{ exercise.title }}" class="img-fluid" />
-        </div>
-      </h3>
-
-      <article class="blog-post">
-    
-        <div class="news-description">
-          <p class="text-break">{{ exercise.body }}</p>
-        </div>
-      </article>
-
-      <nav class="blog-pagination" aria-label="Pagination">
-        
-          <ng-container *ngIf="user$ | async as user">
-            <a class="btn btn-danger" (click)="openDeleteModal()" tabindex="-1" aria-disabled="true">Delete</a>
-          </ng-container>
-        
-        <a class="btn btn-danger"  (click)="edit()" tabindex="-1" aria-disabled="true">Edit</a>
-      </nav>
-    </div>
-
-   
+  <div *ngIf="isLoading">
+    Loading...
   </div>
-</main>
+  <div *ngIf="!isLoading">
+    <body>
+
+      <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-8">
+                <!-- Post content-->
+                <article>
+                    <header class="mb-4">
+                        <!-- Post title with larger font size -->
+                        <h1 class="fw-bolder mb-1" style="font-size: xx-large;">
+                            {{ exercise.title }}
+                            <!-- Big yellow star icon -->
+                            <!-- SVG csillag ikon -->
+                           
+                        </h1>
+                        <!-- Post meta content-->
+                        <div class="text-muted fst-italic mb-2">Posted on {{ exercise.created_at}}</div>
+                        
+                        <!-- Post categories-->
+                        
+                        <a *ngIf="exercise?.type?.name" class="badge bg-secondary text-decoration-none link-light" >{{ exercise.type.name }}</a>
+                    </header>
+                </article>
+            </div>
+        </div>
+    </div>
+  </body>
+    
+    <main class="container">
+      <div class="row">
+        <div class="col">
+          <h3 class="pb-4 mb-4 fst-italic border-bottom">
+            <div class="news-image">
+             <!--<img src="{{ exercise.photo.photoData }}" alt="{{ exercise.title }}" class="img-fluid" /> --> 
+             <img src="data:image/png;base64,{{ exercise.photo.photoData  }}" alt="{{ exercise.title }}" class="img-fluid" />
+            </div>
+          </h3>
+    
+          <article class="blog-post">
+        
+            <div class="news-description">
+              <p class="text-break">{{ exercise.body }}</p>
+            </div>
+          </article>
+    
+          <nav class="blog-pagination" aria-label="Pagination">
+            
+              <ng-container *ngIf="user$ | async as user">
+                <a class="btn btn-danger" (click)="openDeleteModal()" tabindex="-1" aria-disabled="true">Delete</a>
+              </ng-container>
+            
+            <a class="btn btn-danger"  (click)="edit()" tabindex="-1" aria-disabled="true">Edit</a>
+          </nav>
+        </div>
+    
+       
+      </div>
+    </main>
+  </div>

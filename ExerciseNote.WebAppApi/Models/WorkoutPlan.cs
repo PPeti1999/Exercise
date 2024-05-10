@@ -1,10 +1,14 @@
 ﻿using System.Collections.Generic;
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace ExerciseNote.WebAppApi.Models
 {
     public class WorkoutPlan
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]// szöveges id generálás
         public string Id { get; set; }
         public string IdBodyDiary { get; set; }
         public List<int> ExerciseIdList { get; set; }

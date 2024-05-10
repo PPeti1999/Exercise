@@ -17,6 +17,7 @@ import { Observable } from 'rxjs';
 export class ExerciseDetailsPageComponent implements OnInit{
   exercise: Exercise=new Exercise();
   user$: Observable<User | null>; // Változó az aktív felhasználó tárolására
+  isLoading: Boolean = true; // Flag to track loading state
   constructor(
     private accountService: AccountService,
     private route: ActivatedRoute,
@@ -31,18 +32,9 @@ export class ExerciseDetailsPageComponent implements OnInit{
     this.exerciseService.getExerciseById(id).subscribe({
       next: (res: Exercise) => {
         this.exercise = res;
+        this.isLoading = false; // Set loading flag to false in case of error
         
-        /*this.exercise = {
-          id: res.id,
-          title: res.title,
-          type: res.type,
-          body: res.body,
-          created_At: res.created_At.toString(), // Átalakítjuk a string dátumot Date objektummá
-          photo: res.photo
-        };*/
-
-        //ráellenőrini h nem 0 template be
-        console.log(res);
+        
     },
           error: (err) => console.error(err),
   });
