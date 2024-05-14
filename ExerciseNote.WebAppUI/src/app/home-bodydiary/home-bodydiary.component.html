@@ -23,53 +23,52 @@
             <a class="btn btn-primary" href="/createbodydiaryweekly" [ngStyle]="{ 'margin-bottom.px': '10' }">Create Body Diary Weekly</a>
             <a class="btn btn-primary" href="/createworkoutplan">Create Training Plan</a>
           </div>
-    
-         
-    <div class="col-sm-8 text-left">
-            <div class="card-container">
-              <div class="card kisebb" *ngFor="let bodyDaryWeekly of bodyDaryWeeklyList"  (click)="openModel(bodyDaryWeekly)">
-                <div class="card-body">
-                  <p class="title">{{ bodyDaryWeekly.weight }} Kg</p>
-                </div>
-                <div class="image-container">
-                  <img src="data:image/png;base64,{{ bodyDaryWeekly.photo.photoData }}" alt="{{ bodyDaryWeekly.weight }}">
-                </div>
+       <!--
+ <div class="col-sm-8 text-left">
+          <div class="card-container">
+            <div class="card kisebb" *ngFor="let bodyDaryWeekly of bodyDaryWeeklyList"  (click)="openModel(bodyDaryWeekly)">
+              <div class="card-body">
+                <p class="title">{{ bodyDaryWeekly.weight }} Kg</p>
               </div>
-              <div class="card kisebb" *ngFor="let workoutPlan of workouPlanList"  (click)="openModelW(workoutPlan)">
-                <div class="card-body">
-                  <p class="title">Burned Calories: {{ workoutPlan.burnedCalories }}</p>
-                </div>
-                <div class="image-container">
-                  <img src="./assets/images/weekly-workout-schedule.png" class="me-3" alt="Logo" width="75" height="75">
-                  
-                </div>
-              </div>
-         
-    
-    
-            </div>
-          </div>
-         
-          <div class="col-sm-8 text-left">
-            <div class="card-container">
-              <div class="card kisebb" *ngFor="let item of allItems; let i = index" (click)="openModel(item)">
-                <div class="card-body">
-                 
-                </div>
-                <div class="image-container">
-                  <img src="{{ getImageSrc(item) }}" alt="{{ item.id }}">
-                </div>
-                <div class="image-container">
-    
-                  <img *ngIf="item instanceof WorkoutPlan" src="./assets/images/weekly-workout-schedule.png" class="me-3" alt="Logo" width="75" height="75">
-                </div>
+              <div class="image-container">
+                <img src="data:image/png;base64,{{ bodyDaryWeekly.photo.photoData }}" alt="{{ bodyDaryWeekly.weight }}">
               </div>
             </div>
+            <div class="card kisebb" *ngFor="let workoutPlan of workouPlanList"  (click)="openModelW(workoutPlan)">
+              <div class="card-body">
+                <p class="title">Burned Calories: {{ workoutPlan.burnedCalories }}</p>
+              </div>
+              <div class="image-container">
+                <img src="./assets/images/weekly-workout-schedule.png" class="me-3" alt="Logo" width="75" height="75">
+                
+              </div>
+            </div>
+       
+  
+  
           </div>
-    
-    
-    
-        
+        </div>
+        -->
+       
+
+     <!--
+           
+        -->  
+
+        <div class="col-sm-8 text-left">
+          <div class="card-container">
+            <ng-container *ngFor="let item of allItems">
+              <ng-container *ngIf="isBodyDiaryWeekly(item)">
+                <app-card-bodydiary [item]="item" ></app-card-bodydiary>
+              </ng-container>
+              <ng-container *ngIf="isWorkoutPlan(item)">
+                <app-card-workoutplan [item]="item"></app-card-workoutplan>
+              </ng-container>
+            </ng-container>
+          </div>
+        </div>
+
+
           <div class="col-sm-3 custom-column">
             <div>
               <div class="card">
@@ -92,8 +91,7 @@
           
         </div>
       </div>
-    
-     
+        
     <!-- The Modal -->
     <div class="modal" id="myModal">
       <div class="modal-dialog">
@@ -146,6 +144,8 @@
         </div>
       </div>
     </div>
+     
+   
     
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>

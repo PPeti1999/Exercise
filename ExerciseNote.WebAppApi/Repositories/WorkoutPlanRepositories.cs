@@ -25,6 +25,7 @@ namespace ExerciseNote.WebAppApi.Repositories
             return workoutPlan;
         }
 
+
         public async Task<IEnumerable<WorkoutPlan>> ListActualWorkoutPlan(string actualidBodyDiary)
         {
             var bodyDiary = await context.BodyDiary

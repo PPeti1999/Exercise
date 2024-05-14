@@ -29,6 +29,8 @@ import { ChartModule } from 'primeng/chart';
 import { CreateWorkoutplanComponent } from './create-workoutplan/create-workoutplan.component';
 import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { CardBodydiaryComponent } from './card-bodydiary/card-bodydiary.component';
+import { CardWorkoutplanComponent } from './card-workoutplan/card-workoutplan.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +44,11 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     CreateBodydiaryComponent,
     HomeBodydiaryComponent,
     CreateBodydiaryweeklyComponent,
-    CreateWorkoutplanComponent
+    CreateWorkoutplanComponent,
+    CardBodydiaryComponent,
+    CardWorkoutplanComponent,
+    CardBodydiaryComponent,
+    CardWorkoutplanComponent
   ],
   imports: [
     FormsModule,

@@ -1,0 +1,37 @@
+<div class="card" (click)="openModelW(item)">
+    <div class="card-body">
+      <p class="title">Burned Calories: {{ item.burnedCalories }}</p>
+    </div>
+    <div class="image-container">
+      <img src="./assets/images/weekly-workout-schedule.png" class="me-3" alt="Logo" width="75" height="75">
+    </div>
+  </div>
+ <div class="modal" id="myModalW{{ item.id }}">
+    <div class="modal-dialog">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <p class="title">Burned Calories: {{selectedCardDataW?.burnedCalories}}</p>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="closeModelW()"></button>
+        </div>
+  
+        <!-- Modal body -->
+        <!-- Modal body -->
+        <div class="modal-body">
+            <a class="nav-brand">
+      
+              <div  *ngFor="let exerciseElements of exerciseList">
+                <a [routerLink]="'/exercise/' + exerciseElements.id">
+                  <p class="title">{{ exerciseElements.title }}</p>
+                </a>
+              </div>
+  
+  
+            </a>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+  

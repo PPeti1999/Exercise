@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ComponentFactory, ComponentFactoryResolver, EventEmitter, Injector, Output } from '@angular/core';
 import { BodyDiary } from '../models/bodyDiary';
 import { HomeBodydiaryService } from '../service/home-bodydiary.service';
 import { User } from '../shared/models/account/user';
@@ -10,12 +10,15 @@ import { WorkoutplanService } from '../service/workoutplan.service';
 import { ExerciseService } from '../service/exercise.service';
 import { Exercise } from '../models/exercise';
 import { Pipe, PipeTransform } from '@angular/core';
+import { CardBodydiaryComponent } from '../card-bodydiary/card-bodydiary.component';
+import { CardWorkoutplanComponent } from '../card-workoutplan/card-workoutplan.component';
 @Component({
   selector: 'app-home-bodydiary',
   templateUrl: './home-bodydiary.component.html',
   styleUrl: './home-bodydiary.component.css'
 })
 export class HomeBodydiaryComponent {
+  @Output() someEvent = new EventEmitter<any>();
   isLoading: Boolean = true; // Flag to track loading state
   exercise: Exercise=new Exercise();
   exerciseList: Exercise[];
@@ -28,13 +31,25 @@ export class HomeBodydiaryComponent {
   selectedCardData: any;
   selectedCardDataW: any;
 displayModal: boolean = false;
-allItems: (BodyDiaryWeekly | WorkoutPlan)[] = []; // Ebben a listában tároljuk az összes elemet
 
-constructor(private exerciseService :ExerciseService, private _workoutPlanService:WorkoutplanService, private _BodydiaryweeklyService:BodydiaryweeklyService,private _homeBodyDiaryService: HomeBodydiaryService, public _accountService: AccountService
+sendDataToChild() {
+  const data = { /* Some data */ };
+  this.someEvent.emit(data);
+}
+handleChildEvent(data: any) {
+  // Kezelje itt a gyermekkomponens eseményét és az átadott adatokat
+  console.log('Received data from child:', data);
+}
+
+allItems: (BodyDiaryWeekly | WorkoutPlan)[] = []; // Az összes elem tömbje
+
+
+constructor(private resolver: ComponentFactoryResolver, public injector: Injector, private exerciseService :ExerciseService, private _workoutPlanService:WorkoutplanService, private _BodydiaryweeklyService:BodydiaryweeklyService,private _homeBodyDiaryService: HomeBodydiaryService, public _accountService: AccountService
   )  {}
     ngOnInit(): void {
       this.loadCurrentUser();
       this.GetLastBodyDiary(this.currentUser);
+   
      
     }
 
@@ -45,8 +60,10 @@ constructor(private exerciseService :ExerciseService, private _workoutPlanServic
         if (bodyDaryWeekly instanceof BodyDiaryWeekly) {
           console.log('example változó típusa string.');
         }
-
-        this.selectedCardData = bodyDaryWeekly;
+      
+        console.log("aktuális bodyDaryWeekly", bodyDaryWeekly );
+        this.selectedCardData = bodyDaryWeekly; // Módosítottuk itt
+        console.log("selected", this.selectedCardData );
         modelDiv.style.display='block';
       }
     }
@@ -56,13 +73,43 @@ constructor(private exerciseService :ExerciseService, private _workoutPlanServic
         modelDiv.style.display='none';
       }
     }
-
-    getAllItems() {
-      this.allItems = [...this.bodyDaryWeeklyList, ...this.workouPlanList];
-      this.allItems.sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime());
-
+    isBodyDiaryWeekly(item: any): item is BodyDiaryWeekly {
+     // console.log(item);
+    //console.log(item instanceof BodyDiaryWeekly);
+    return typeof item === 'object' && item !== null && 'weight' in item;
+      return item instanceof BodyDiaryWeekly;
+    }
+  
+    isWorkoutPlan(item: any): item is WorkoutPlan {
+     // console.log(item instanceof WorkoutPlan);
+     // return item instanceof WorkoutPlan;
+      return typeof item === 'object' && item !== null && 'burnedCalories' in item;
+    }
+  /*  isBodyDiaryWeekly(item: any): boolean {
+      return typeof item === 'object' && item !== null && 'weight' in item;
     }
     
+    isWorkoutPlan(item: any): boolean {
+      return typeof item === 'object' && item !== null && 'burnedCalories' in item;
+    }*/
+    getAllItems() {
+      this.allItems = [...this.bodyDaryWeeklyList, ...this.workouPlanList];
+      this.allItems.sort((a, b) => {
+        const dateA = new Date(a.created_at).getTime();
+        const dateB = new Date(b.created_at).getTime();
+        return dateA - dateB;
+      });
+    }
+    
+    getComponentType(item: any): any {
+      return item instanceof BodyDiaryWeekly ? CardBodydiaryComponent : CardWorkoutplanComponent;
+    }
+    createComponentFactory(componentType: any): ComponentFactory<any> {
+      return this.resolver.resolveComponentFactory(componentType);
+    }
+
+
+
     openModelW(workoutPlan: any){
       const modelDiv=document.getElementById('myModalW');
      // this.getExerciseById()
@@ -127,9 +174,10 @@ constructor(private exerciseService :ExerciseService, private _workoutPlanServic
             ]
           };
       
-
-
-
+          
+          this.getAllItems(); // Az összes elem összegyűjtése és rendezése
+          console.log(this.allItems);
+          
 
         },
         error: (err) => console.error(err),
@@ -143,8 +191,8 @@ constructor(private exerciseService :ExerciseService, private _workoutPlanServic
         this.workouPlanList = res;
         console.log("aktuális workoutplan LIST:",this.workouPlanList)
 
-
-        this.getAllItems(); // Az összes elem összegyűjtése és rendezése
+       
+       
       //  console.log("all items:",allItems)
       },
       error: (err) => console.error(err),
@@ -165,8 +213,9 @@ constructor(private exerciseService :ExerciseService, private _workoutPlanServic
       console.log("aktuális bodydairy:",this.bodyDiary);
       this.ListActualBodyDiaryWeekly();
       this.ListActualWorkoutPlan();
+      
       this.isLoading = false; // Set loading flag to false in case of error
-    
+      
     },
     error: (err) => console.error(err),
   });

@@ -1,0 +1,33 @@
+<div class="card kisebb " (click)="openModel(item)">
+    <div class="card-body" >
+      <p class="title">{{ item.weight }} Kg</p>
+    </div>
+    <div class="image-container">
+      <img src="data:image/png;base64,{{ item.photo.photoData }}" alt="{{ item.weight }}">
+    </div>
+  </div>
+
+
+<!-- The Modal -->
+<div class="modal" id="myModal{{ item.id }}">
+    <div class="modal-dialog">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <p class="title">Weight: {{ selectedCardData?.weight }} Kg</p>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="closeModel()"></button>
+        </div>
+  
+        <!-- Modal body -->
+        <!-- Modal body -->
+        <div class="modal-body">
+            <a class="nav-brand">
+      
+                <img src="data:image/png;base64,{{ selectedCardData?.photo?.photoData }}"  style="max-width: 100%; height: auto;">
+            </a>
+        </div>
+  
+      </div>
+    </div>
+  </div>

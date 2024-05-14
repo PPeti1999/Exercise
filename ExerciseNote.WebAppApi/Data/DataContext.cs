@@ -124,7 +124,24 @@ namespace ExerciseNote.WebAppApi.Data
                 new ExerciseType { Id = "2", Name = "Chest" },
                 new ExerciseType { Id = "3", Name = "Legs" }
             );
-           
+            modelBuilder.Entity<User>().HasData(
+            new User
+            {
+                Id = "085771b8-55d6-4b2b-91f3-2accdfd12073",
+                UserName = "pasztoripeti@hotmail.com",
+                NormalizedUserName = "PASZTORIPETI@HOTMAIL.COM",
+                Email = "pasztoripeti@hotmail.com",
+                NormalizedEmail = "PASZTORIPETI@HOTMAIL.COM",
+                EmailConfirmed = true,
+                PasswordHash = "AQAAAAIAAYagAAAAECBoaNB2n8ZVobY/CDh3gaTdUpyxKLBgSrspHHPEKiQmCO/BSI1w+7jYo6Ty7IFwEA==", // Jelszó: password
+                SecurityStamp = "XF45CN4VBWDFSIA7BPSS74QZUYHP2JNN",
+                ConcurrencyStamp = "fef26f8a-120b-4e7f-b37e-d844c5871a35",
+                FirstName = "pásztori",
+                LastName = "péter",
+                DateCreated = DateTime.UtcNow
+            }
+        );
+
         }
     }
 }

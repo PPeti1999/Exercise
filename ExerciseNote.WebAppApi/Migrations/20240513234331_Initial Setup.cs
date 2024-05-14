@@ -274,6 +274,11 @@ namespace ExerciseNote.WebAppApi.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "DateCreated", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "085771b8-55d6-4b2b-91f3-2accdfd12073", 0, "fef26f8a-120b-4e7f-b37e-d844c5871a35", new DateTime(2024, 5, 13, 23, 43, 30, 990, DateTimeKind.Utc).AddTicks(9749), "pasztoripeti@hotmail.com", true, "pásztori", "péter", false, null, "PASZTORIPETI@HOTMAIL.COM", "PASZTORIPETI@HOTMAIL.COM", "AQAAAAIAAYagAAAAECBoaNB2n8ZVobY/CDh3gaTdUpyxKLBgSrspHHPEKiQmCO/BSI1w+7jYo6Ty7IFwEA==", null, false, "XF45CN4VBWDFSIA7BPSS74QZUYHP2JNN", false, "pasztoripeti@hotmail.com" });
+
+            migrationBuilder.InsertData(
                 table: "ExerciseType",
                 columns: new[] { "Id", "Name" },
                 values: new object[,]

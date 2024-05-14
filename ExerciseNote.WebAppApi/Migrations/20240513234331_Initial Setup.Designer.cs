@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExerciseNote.WebAppApi.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240506211320_Initial Setup")]
+    [Migration("20240513234331_Initial Setup")]
     partial class InitialSetup
     {
         /// <inheritdoc />
@@ -328,11 +328,33 @@ namespace ExerciseNote.WebAppApi.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "085771b8-55d6-4b2b-91f3-2accdfd12073",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "fef26f8a-120b-4e7f-b37e-d844c5871a35",
+                            DateCreated = new DateTime(2024, 5, 13, 23, 43, 30, 990, DateTimeKind.Utc).AddTicks(9749),
+                            Email = "pasztoripeti@hotmail.com",
+                            EmailConfirmed = true,
+                            FirstName = "pásztori",
+                            LastName = "péter",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "PASZTORIPETI@HOTMAIL.COM",
+                            NormalizedUserName = "PASZTORIPETI@HOTMAIL.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAECBoaNB2n8ZVobY/CDh3gaTdUpyxKLBgSrspHHPEKiQmCO/BSI1w+7jYo6Ty7IFwEA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "XF45CN4VBWDFSIA7BPSS74QZUYHP2JNN",
+                            TwoFactorEnabled = false,
+                            UserName = "pasztoripeti@hotmail.com"
+                        });
                 });
 
             modelBuilder.Entity("ExerciseNote.WebAppApi.Models.WorkoutPlan", b =>
                 {
                     b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("BurnedCalories")

@@ -40,15 +40,14 @@ namespace ExerciseNote.WebAppApi.Controllers
         [HttpPost]
         public async Task<ActionResult<WorkoutPlan>> AddWrokoutPlan([FromBody] WorkoutPlan workoutPlan)
         {
-            if (workoutPlan.ExerciseIdList == null) return BadRequest();
+            if (workoutPlan == null || workoutPlan.ExerciseIdList == null || workoutPlan.ExerciseIdList.Count == 0)
+            {
+                return BadRequest("Invalid workout plan data. ExerciseIdList cannot be null or empty.");
+            }
 
+            var createdPlan = await _workouPlanRepository.AddWrokoutPlan(workoutPlan);
 
-
-
-
-            var create = await _workouPlanRepository.AddWrokoutPlan(workoutPlan);
-
-            return Ok(create);
+            return Ok(createdPlan);
         }
     }
 }

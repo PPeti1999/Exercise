@@ -26,7 +26,7 @@ export class WorkoutplanService {
 
 
   AddWorkoutPlan (bodyDiary: WorkoutPlan): Observable<WorkoutPlan> {
-    console.log(bodyDiary);
+    console.log("itt a baj:?",bodyDiary);
     return this.http.post<WorkoutPlan>(this.baseUrl, bodyDiary, {
       headers: { 'Content-Type': 'application/json' },
     });
