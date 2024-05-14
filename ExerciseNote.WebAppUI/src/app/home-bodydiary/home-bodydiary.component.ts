@@ -93,12 +93,29 @@ constructor(private resolver: ComponentFactoryResolver, public injector: Injecto
       return typeof item === 'object' && item !== null && 'burnedCalories' in item;
     }*/
     getAllItems() {
-      this.allItems = [...this.bodyDaryWeeklyList, ...this.workouPlanList];
-      this.allItems.sort((a, b) => {
-        const dateA = new Date(a.created_at).getTime();
-        const dateB = new Date(b.created_at).getTime();
-        return dateA - dateB;
-      });
+      // Feltételes ellenőrzés, hogy a listák nem null értékűek-e
+      if (this.bodyDaryWeeklyList && this.workouPlanList) {
+        // Ha mindkét lista létezik, akkor rendezzük őket és összefűzzük
+        this.allItems = [...this.bodyDaryWeeklyList, ...this.workouPlanList];
+      } else if (this.bodyDaryWeeklyList) {
+        // Ha csak a bodyDaryWeeklyList létezik, akkor csak azt használjuk
+        this.allItems = this.bodyDaryWeeklyList;
+      } else if (this.workouPlanList) {
+        // Ha csak a workouPlanList létezik, akkor csak azt használjuk
+        this.allItems = this.workouPlanList;
+      } else {
+        // Ha egyik lista sem létezik, akkor üres listát állítunk be
+        this.allItems = [];
+      }
+    
+      // Csak akkor rendezzük, ha van mit rendezni
+      if (this.allItems.length > 0) {
+        this.allItems.sort((a, b) => {
+          const dateA = new Date(a.created_at).getTime();
+          const dateB = new Date(b.created_at).getTime();
+          return dateA - dateB;
+        });
+      }
     }
     
     getComponentType(item: any): any {
@@ -209,13 +226,15 @@ constructor(private resolver: ComponentFactoryResolver, public injector: Injecto
     const userId = u ? u.id : ''; // Providing a default value if id is undefined
   this._homeBodyDiaryService.GetLastBodyDiary(userId).subscribe({
     next: (res: BodyDiary) => {
-      this.bodyDiary = res;
-      console.log("aktuális bodydairy:",this.bodyDiary);
-      this.ListActualBodyDiaryWeekly();
-      this.ListActualWorkoutPlan();
-      
-      this.isLoading = false; // Set loading flag to false in case of error
-      
+      if (res) {
+        this.bodyDiary = res;
+        this.ListActualBodyDiaryWeekly();
+        this.ListActualWorkoutPlan();
+        this.isLoading = false; // Set loading flag to false in case of error
+    } else {
+        console.log('No Body Diary found.');
+        // Set isLoading to false here if needed
+    }
     },
     error: (err) => console.error(err),
   });

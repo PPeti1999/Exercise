@@ -65,9 +65,10 @@
             
               <ng-container *ngIf="user$ | async as user">
                 <a class="btn btn-danger" (click)="openDeleteModal()" tabindex="-1" aria-disabled="true">Delete</a>
+                <a class="btn btn-danger"  (click)="edit()" tabindex="-1" aria-disabled="true">Edit</a>
               </ng-container>
             
-            <a class="btn btn-danger"  (click)="edit()" tabindex="-1" aria-disabled="true">Edit</a>
+            
           </nav>
         </div>
     

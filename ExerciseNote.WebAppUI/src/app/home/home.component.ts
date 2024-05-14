@@ -9,6 +9,7 @@ import { ExerciseService } from '../service/exercise.service';
 })
 export class HomeComponent {
   exerciseList: Exercise[];
+  isLoading: Boolean = true; // Flag to track loading state
   constructor(private _exerciseService: ExerciseService
     ) {}
     ngOnInit(): void {
@@ -18,7 +19,7 @@ export class HomeComponent {
     this._exerciseService.getExercise().subscribe({
       next: (res: Exercise[]) => {
         this.exerciseList = res;
-        console.log(this.exerciseList);
+        this.isLoading = false; // Set loading flag to false in case of error
       
       },
       error: (err) => console.error(err),

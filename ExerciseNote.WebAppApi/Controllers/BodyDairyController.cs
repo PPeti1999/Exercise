@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ExerciseNote.WebAppApi.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class BodyDairyController : ControllerBase
