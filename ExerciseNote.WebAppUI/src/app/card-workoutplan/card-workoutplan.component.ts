@@ -15,7 +15,7 @@ export class CardWorkoutplanComponent {
   constructor( private exerciseService :ExerciseService
     )  {}
     ngOnInit(): void {
-     
+     console.log("tavsz");
    
      
     }

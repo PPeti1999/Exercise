@@ -276,7 +276,7 @@ namespace ExerciseNote.WebAppApi.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "DateCreated", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "085771b8-55d6-4b2b-91f3-2accdfd12073", 0, "fef26f8a-120b-4e7f-b37e-d844c5871a35", new DateTime(2024, 5, 13, 23, 43, 30, 990, DateTimeKind.Utc).AddTicks(9749), "pasztoripeti@hotmail.com", true, "pásztori", "péter", false, null, "PASZTORIPETI@HOTMAIL.COM", "PASZTORIPETI@HOTMAIL.COM", "AQAAAAIAAYagAAAAECBoaNB2n8ZVobY/CDh3gaTdUpyxKLBgSrspHHPEKiQmCO/BSI1w+7jYo6Ty7IFwEA==", null, false, "XF45CN4VBWDFSIA7BPSS74QZUYHP2JNN", false, "pasztoripeti@hotmail.com" });
+                values: new object[] { "085771b8-55d6-4b2b-91f3-2accdfd12073", 0, "fef26f8a-120b-4e7f-b37e-d844c5871a35", new DateTime(2024, 5, 15, 8, 46, 58, 727, DateTimeKind.Utc).AddTicks(6969), "pasztoripeti@hotmail.com", true, "pásztori", "péter", false, null, "PASZTORIPETI@HOTMAIL.COM", "PASZTORIPETI@HOTMAIL.COM", "AQAAAAIAAYagAAAAECBoaNB2n8ZVobY/CDh3gaTdUpyxKLBgSrspHHPEKiQmCO/BSI1w+7jYo6Ty7IFwEA==", null, false, "XF45CN4VBWDFSIA7BPSS74QZUYHP2JNN", false, "pasztoripeti@hotmail.com" });
 
             migrationBuilder.InsertData(
                 table: "ExerciseType",
@@ -291,28 +291,12 @@ namespace ExerciseNote.WebAppApi.Migrations
             migrationBuilder.InsertData(
                 table: "Photos",
                 columns: new[] { "Id", "PhotoData" },
-                values: new object[,]
-                {
-                    { "1", null },
-                    { "2", null },
-                    { "3", null },
-                    { "4", null },
-                    { "5", null },
-                    { "6", null }
-                });
+                values: new object[] { "1", null });
 
             migrationBuilder.InsertData(
                 table: "Exercise",
                 columns: new[] { "Id", "Body", "Created_at", "ExerciseTypeId", "PhotoId", "Title" },
-                values: new object[,]
-                {
-                    { "1", "Just Do it.", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "1", "1", "Lehúzás" },
-                    { "2", "Hurry Up!", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "2", "2", "Húzódzkodás" },
-                    { "3", "Just Do it.1", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "1", "3", "Lehúzás1" },
-                    { "4", "Hurry Up!1", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "2", "4", "Húzódzkodás1" },
-                    { "5", "Just Do it.2", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "1", "5", "Lehúzás2" },
-                    { "6", "Hurry Up!2", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "2", "6", "Húzódzkodás2" }
-                });
+                values: new object[] { "1", "Just Do it.", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "1", "1", "Lehúzás" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

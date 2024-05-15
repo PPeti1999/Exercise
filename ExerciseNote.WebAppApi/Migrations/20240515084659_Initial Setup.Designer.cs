@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExerciseNote.WebAppApi.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240513234331_Initial Setup")]
+    [Migration("20240515084659_Initial Setup")]
     partial class InitialSetup
     {
         /// <inheritdoc />
@@ -131,51 +131,6 @@ namespace ExerciseNote.WebAppApi.Migrations
                             ExerciseTypeId = "1",
                             PhotoId = "1",
                             Title = "Lehúzás"
-                        },
-                        new
-                        {
-                            Id = "2",
-                            Body = "Hurry Up!",
-                            Created_at = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ExerciseTypeId = "2",
-                            PhotoId = "2",
-                            Title = "Húzódzkodás"
-                        },
-                        new
-                        {
-                            Id = "3",
-                            Body = "Just Do it.1",
-                            Created_at = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ExerciseTypeId = "1",
-                            PhotoId = "3",
-                            Title = "Lehúzás1"
-                        },
-                        new
-                        {
-                            Id = "4",
-                            Body = "Hurry Up!1",
-                            Created_at = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ExerciseTypeId = "2",
-                            PhotoId = "4",
-                            Title = "Húzódzkodás1"
-                        },
-                        new
-                        {
-                            Id = "5",
-                            Body = "Just Do it.2",
-                            Created_at = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ExerciseTypeId = "1",
-                            PhotoId = "5",
-                            Title = "Lehúzás2"
-                        },
-                        new
-                        {
-                            Id = "6",
-                            Body = "Hurry Up!2",
-                            Created_at = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ExerciseTypeId = "2",
-                            PhotoId = "6",
-                            Title = "Húzódzkodás2"
                         });
                 });
 
@@ -231,26 +186,6 @@ namespace ExerciseNote.WebAppApi.Migrations
                         new
                         {
                             Id = "1"
-                        },
-                        new
-                        {
-                            Id = "2"
-                        },
-                        new
-                        {
-                            Id = "3"
-                        },
-                        new
-                        {
-                            Id = "4"
-                        },
-                        new
-                        {
-                            Id = "5"
-                        },
-                        new
-                        {
-                            Id = "6"
                         });
                 });
 
@@ -335,7 +270,7 @@ namespace ExerciseNote.WebAppApi.Migrations
                             Id = "085771b8-55d6-4b2b-91f3-2accdfd12073",
                             AccessFailedCount = 0,
                             ConcurrencyStamp = "fef26f8a-120b-4e7f-b37e-d844c5871a35",
-                            DateCreated = new DateTime(2024, 5, 13, 23, 43, 30, 990, DateTimeKind.Utc).AddTicks(9749),
+                            DateCreated = new DateTime(2024, 5, 15, 8, 46, 58, 727, DateTimeKind.Utc).AddTicks(6969),
                             Email = "pasztoripeti@hotmail.com",
                             EmailConfirmed = true,
                             FirstName = "pásztori",

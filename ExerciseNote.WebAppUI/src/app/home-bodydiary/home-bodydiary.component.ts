@@ -32,15 +32,6 @@ export class HomeBodydiaryComponent {
   selectedCardDataW: any;
 displayModal: boolean = false;
 
-sendDataToChild() {
-  const data = { /* Some data */ };
-  this.someEvent.emit(data);
-}
-handleChildEvent(data: any) {
-  // Kezelje itt a gyermekkomponens eseményét és az átadott adatokat
-  console.log('Received data from child:', data);
-}
-
 allItems: (BodyDiaryWeekly | WorkoutPlan)[] = []; // Az összes elem tömbje
 
 
@@ -53,7 +44,7 @@ constructor(private resolver: ComponentFactoryResolver, public injector: Injecto
      
     }
 
-    openModel(bodyDaryWeekly: any){
+    openModelS(bodyDaryWeekly: any){
       const modelDiv=document.getElementById('myModal');
       if(modelDiv!=null){
 
@@ -67,7 +58,7 @@ constructor(private resolver: ComponentFactoryResolver, public injector: Injecto
         modelDiv.style.display='block';
       }
     }
-    closeModel(){
+    closeModelS(){
       const modelDiv=document.getElementById('myModal');
       if(modelDiv!=null){
         modelDiv.style.display='none';
@@ -94,20 +85,20 @@ constructor(private resolver: ComponentFactoryResolver, public injector: Injecto
     }*/
     getAllItems() {
       // Feltételes ellenőrzés, hogy a listák nem null értékűek-e
-      if (this.bodyDaryWeeklyList && this.workouPlanList) {
+      if (this.bodyDaryWeeklyList!=null && this.workouPlanList!=null) {
         // Ha mindkét lista létezik, akkor rendezzük őket és összefűzzük
         this.allItems = [...this.bodyDaryWeeklyList, ...this.workouPlanList];
-      } else if (this.bodyDaryWeeklyList) {
+      } else if (this.bodyDaryWeeklyList!=null) {
         // Ha csak a bodyDaryWeeklyList létezik, akkor csak azt használjuk
         this.allItems = this.bodyDaryWeeklyList;
-      } else if (this.workouPlanList) {
+      } else if (this.workouPlanList!=null) {
         // Ha csak a workouPlanList létezik, akkor csak azt használjuk
         this.allItems = this.workouPlanList;
       } else {
         // Ha egyik lista sem létezik, akkor üres listát állítunk be
         this.allItems = [];
       }
-    
+    console.log("most ebbyu",this.allItems);
       // Csak akkor rendezzük, ha van mit rendezni
       if (this.allItems.length > 0) {
         this.allItems.sort((a, b) => {
@@ -192,12 +183,13 @@ constructor(private resolver: ComponentFactoryResolver, public injector: Injecto
           };
       
           
-          this.getAllItems(); // Az összes elem összegyűjtése és rendezése
-          console.log(this.allItems);
           
+          console.log(this.allItems);
+          this.getAllItems(); // Az összes elem összegyűjtése és rendezése
 
         },
-        error: (err) => console.error(err),
+        error: (err) => { console.error(err), this.getAllItems(); },
+     
       });
     
   }
@@ -207,10 +199,9 @@ constructor(private resolver: ComponentFactoryResolver, public injector: Injecto
       next: (res: WorkoutPlan[]) => { 
         this.workouPlanList = res;
         console.log("aktuális workoutplan LIST:",this.workouPlanList)
-
+        
        
        
-      //  console.log("all items:",allItems)
       },
       error: (err) => console.error(err),
     });
@@ -231,6 +222,8 @@ constructor(private resolver: ComponentFactoryResolver, public injector: Injecto
         this.ListActualBodyDiaryWeekly();
         this.ListActualWorkoutPlan();
         this.isLoading = false; // Set loading flag to false in case of error
+       
+        console.log("all items:",this.allItems)
     } else {
         console.log('No Body Diary found.');
         // Set isLoading to false here if needed

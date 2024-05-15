@@ -75,7 +75,7 @@ export class CreateWorkoutplanComponent {
    console.log("atualis body id",this.bodyDiary);
     this.workoutPlan.IdBodyDiary=this.bodyDiary.id;
     this.workoutPlan.created_at = new Date().toISOString();
-    this.workoutPlan.burnedCalories=Math.round((this.bodyDiary.weight/200)*3.5*10);
+    this.workoutPlan.burnedCalories=Math.round((this.bodyDiary.weight*this.workoutPlan.workoutTime*13)/200);
 
   // Kiválasztott gyakorlatok azonosítóinak hozzáadása a workoutPlan exerciseIdList tömbjéhez
 console.log ("adatok:",this.selectedExercisesControl)

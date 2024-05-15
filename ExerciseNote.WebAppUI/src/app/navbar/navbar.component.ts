@@ -25,41 +25,6 @@ export class NavbarComponent {
   }
 
   ngOnInit(): void {
-    this.loadCurrentUser();
   }
-  loadCurrentUser() {//aktuális user
-    this._accountService.user$.subscribe((user: User | null) => {
-      this.currentUser = user;
-      if (user) {
-        console.log('Bejelentkezett felhasználó:', user);
-        this.GetLastBodyDiary(this.currentUser);
-      } else {
-        console.log('Nincs bejelentkezett felhasználó.');
-      }
-    });
-  }
-  GetLastBodyDiary(u: User | null): void {
-    const userId = u ? u.id : '';
-    console.log("kint van ",userId);
-    if (userId!=''){
-    console.log("bejutott.")
-      this._homeBodyDiaryService.GetLastBodyDiary(userId).subscribe({
-        next: (res: BodyDiary) => {
-            if (res) {
-                this.bodyDiary = res;
-                
-                this.isLoading = false; // Set loading flag to false in case of error
-            } else {
-                console.log('No Body Diary found.');
-                // Set isLoading to false here if needed
-            }
-        },
-        error: (err) => {
-            console.error(err);
-            // Set isLoading to false here if needed
-        }
-    });
-    }
-
-} 
+ 
 }

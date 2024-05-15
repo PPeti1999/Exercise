@@ -21,14 +21,14 @@
   
   .image-container {
     width: 100%;
-    height: 150px; /* Válaszd meg az ideális magasságot az igényeid szerint */
-    overflow: hidden; /* Elrejti a túlcsorduló képrészleteket */
+    height: auto;
+    display: block; 
+    overflow: hidden; 
   }
   
-  .image-container img {
+ /* .image-container img {
     width: 100%;
     height: auto;
-    display: block; /* Az alapértelmezett inline kép elem helyett blokk elemmé alakítja */
-    margin: 0 auto; /* A kép középre helyezése */
-  }
-  
+    display: block; 
+    margin: 0 auto;
+  }*/
