@@ -200,7 +200,7 @@ constructor(private resolver: ComponentFactoryResolver, public injector: Injecto
         this.workouPlanList = res;
         console.log("aktuális workoutplan LIST:",this.workouPlanList)
         
-       
+        this.getAllItems();
        
       },
       error: (err) => console.error(err),
