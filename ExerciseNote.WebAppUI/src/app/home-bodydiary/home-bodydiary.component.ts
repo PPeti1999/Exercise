@@ -104,7 +104,7 @@ constructor(private resolver: ComponentFactoryResolver, public injector: Injecto
         this.allItems.sort((a, b) => {
           const dateA = new Date(a.created_at).getTime();
           const dateB = new Date(b.created_at).getTime();
-          return dateA - dateB;
+          return dateB - dateA;
         });
       }
     }

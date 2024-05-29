@@ -1,6 +1,6 @@
 <div class="card" (click)="openModelW(item)">
     <div class="card-body">
-      <p class="title">Burned Calories: {{ item.burnedCalories }}</p>
+      <p class="title">Burned Calories: {{ item.burnedCalories }} kcal</p>
       <p class="title">Created At: {{ item.created_at | date:'yyyy-MM-dd' }}</p>
     </div>
     <div class="image-container">
@@ -13,7 +13,7 @@
   
         <!-- Modal Header -->
         <div class="modal-header">
-          <p class="title">Burned Calories: {{selectedCardDataW?.burnedCalories}}</p>
+          <p class="title">Burned Calories: {{selectedCardDataW?.burnedCalories}} kcal</p>
          
           <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="closeModelW()"></button>
         </div>
